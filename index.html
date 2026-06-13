@@ -5,275 +5,648 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>चर्चा: शिक्षक आंकलन प्रश्नावली - गुरुकुल</title>
   <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #234f92;
+      --primary-dark: #17396a;
+      --accent: #4a752c;
+      --border: #d7dce3;
+      --hint-bg: #f8fbf4;
+      --success-bg: #e9f8ec;
+      --success-text: #176534;
+      --error-bg: #fff0f0;
+      --error-text: #a61b1b;
+      --radius: 10px;
+      --shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; }
+
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-      background: #f9f9f9;
-      color: #222;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
     }
+
+    .page {
+      max-width: 980px;
+      margin: 24px auto;
+      padding: 16px;
+    }
+
     .container {
-      background: white;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background: var(--card);
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
-    h1, h2 {
-      color: #2c5aa0;
+
+    h1, h2, h3 {
+      margin-top: 0;
+      color: var(--primary);
     }
+
+    p {
+      margin: 0 0 10px;
+    }
+
+    .intro {
+      background: #eef4ff;
+      border: 1px solid #cbd9f3;
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
     .lang-toggle {
-      text-align: center;
-      margin: 15px 0 25px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
     }
+
     .lang-toggle button {
-      margin: 0 5px;
-      padding: 8px 16px;
+      border: none;
+      background: var(--primary);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 8px;
       cursor: pointer;
+      font-size: 14px;
     }
+
+    .lang-toggle button:hover {
+      background: var(--primary-dark);
+    }
+
+    .section {
+      margin: 20px 0;
+      padding: 18px;
+      background: #fcfcfc;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+    }
+
+    .section-title {
+      margin-bottom: 8px;
+    }
+
+    .hint-box {
+      background: var(--hint-bg);
+      border: 1px solid #d7e7c8;
+      border-radius: 8px;
+      padding: 14px;
+      margin: 12px 0 16px;
+    }
+
+    .hint-box ul {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+
+    .hint-box li {
+      margin-bottom: 8px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
     label {
       display: block;
-      margin: 12px 0 4px;
-      font-weight: 600;
+      font-weight: 700;
+      margin-bottom: 6px;
     }
-    input, textarea, select {
+
+    input, textarea {
       width: 100%;
-      padding: 10px;
-      margin: 6px 0;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 14px;
-      box-sizing: border-box;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 11px 12px;
+      font-size: 15px;
+      font-family: inherit;
+      background: #fff;
+      color: var(--text);
     }
+
+    input:focus, textarea:focus {
+      outline: 2px solid #b6cdf3;
+      border-color: #8eb0e8;
+    }
+
     textarea {
-      min-height: 80px;
+      min-height: 180px;
       resize: vertical;
     }
-    .section {
-      margin: 18px 0;
-      padding: 15px;
-      background: #fafafa;
-      border-left: 3px solid #4a752c;
+
+    .long-textarea {
+      min-height: 220px;
     }
+
+    .small-note {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .submit-wrap {
+      margin-top: 18px;
+    }
+
     .submit-btn {
-      background: #2c5aa0;
-      color: white;
-      padding: 12px 25px;
       border: none;
-      border-radius: 4px;
-      cursor: pointer;
+      background: var(--primary);
+      color: white;
+      padding: 13px 24px;
       font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
     }
+
     .submit-btn:hover {
-      background: #1a4080;
+      background: var(--primary-dark);
     }
+
     .submit-btn:disabled {
       opacity: 0.7;
       cursor: not-allowed;
     }
-    .hi { display: block; }
-    .en { display: none; }
+
     .status {
-      margin-top: 16px;
-      padding: 12px;
-      border-radius: 4px;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 8px;
       display: none;
       white-space: pre-wrap;
     }
+
     .status.success {
       display: block;
-      background: #e8f5e9;
-      color: #1b5e20;
-      border: 1px solid #a5d6a7;
+      background: var(--success-bg);
+      color: var(--success-text);
+      border: 1px solid #b8e3c1;
     }
+
     .status.error {
       display: block;
-      background: #ffebee;
-      color: #b71c1c;
-      border: 1px solid #ef9a9a;
+      background: var(--error-bg);
+      color: var(--error-text);
+      border: 1px solid #efb8b8;
     }
-    .small-note {
-      font-size: 13px;
-      color: #555;
-      margin-top: 4px;
+
+    .hi, .en, .gu { display: none; }
+
+    @media (max-width: 700px) {
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 16px;
+      }
+
+      textarea,
+      .long-textarea {
+        min-height: 170px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="lang-toggle">
-      <button type="button" onclick="toggleLang('hi')">हिंदी</button>
-      <button type="button" onclick="toggleLang('en')">English</button>
+  <div class="page">
+    <div class="container">
+      <div class="lang-toggle">
+        <button type="button" onclick="toggleLang('hi')">हिंदी</button>
+        <button type="button" onclick="toggleLang('en')">English</button>
+        <button type="button" onclick="toggleLang('gu')">ગુજરાતી</button>
+      </div>
+
+      <h1 class="hi">चर्चा: शिक्षक आंकलन प्रश्नावली</h1>
+      <h1 class="en">Teacher Observation Questionnaire - Gurukul</h1>
+      <h1 class="gu">ચર્ચા: શિક્ષક અવલોકન પ્રશ્નાવલી - ગુરુકુલ</h1>
+
+      <div class="intro">
+        <p class="hi"><strong>कैसे भरें:</strong> अंक न दें, रेटिंग न करें। जो आपने सच में देखा है वही लिखें — ठोस उदाहरण, बार-बार दिखने वाले पैटर्न, और “जब ऐसा हुआ तब बच्चे ने…” जैसे वास्तविक प्रसंग लिखें।</p>
+        <p class="en"><strong>How to answer:</strong> Do not score or rate. Write what you have actually seen — concrete examples, repeated patterns, and real moments such as “when this happened, the child…”.</p>
+        <p class="gu"><strong>કઈ રીતે લખવું:</strong> ગુણાંક કે રેટિંગ આપશો નહીં. તમે ખરેખર શું જોયું છે તે લખો — ચોક્કસ ઉદાહરણો, ફરી ફરી દેખાતા નમૂનાઓ, અને “જ્યારે એવું થયું ત્યારે બાળક…” જેવા સચ્ચા પ્રસંગો લખો.</p>
+
+        <p class="hi">हर सेक्शन में जितना चाहें उतना लिखें। अगर निश्चित न हों तो “मुझे पूरी तरह निश्चित नहीं” या “मैंने दोनों तरह देखा है” लिखें। बच्चे का कई महीनों में दिखने वाला स्थिर स्वभाव लिखें, केवल एक दिन का व्यवहार नहीं।</p>
+        <p class="en">Write as much as needed in every section. If unsure, say “I am not fully sure” or “I have seen both.” Describe the child’s stable pattern across months, not just one day’s behavior.</p>
+        <p class="gu">દરેક વિભાગમાં જેટલું જરૂરી હોય તેટલું લખો. ખાતરી ન હોય તો “હું સંપૂર્ણ ખાતરીથી નથી કહી શકતો/તી” અથવા “મેં બન્ને રીતે જોયું છે” એવું લખો. ફક્ત એક દિવસનું નહીં, પણ ઘણા મહિનાઓમાં દેખાતો સ્થિર સ્વભાવ લખો.</p>
+      </div>
+
+      <form id="observation-form">
+        <div class="section">
+          <h2 class="section-title hi">सेक्शन 0 - संदर्भ</h2>
+          <h2 class="section-title en">Section 0 - Context</h2>
+          <h2 class="section-title gu">વિભાગ 0 - સંદર્ભ</h2>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="student_name" class="hi">छात्र का नाम</label>
+              <label for="student_name" class="en">Student Name</label>
+              <label for="student_name" class="gu">બાળકનું નામ</label>
+              <input type="text" id="student_name" name="student_name" required>
+            </div>
+
+            <div class="field">
+              <label for="age" class="hi">उम्र</label>
+              <label for="age" class="en">Age</label>
+              <label for="age" class="gu">ઉંમર</label>
+              <input type="number" id="age" name="age" min="3" max="25" required>
+            </div>
+
+            <div class="field">
+              <label for="time_known_months" class="hi">कितने महीनों से जानते हैं</label>
+              <label for="time_known_months" class="en">Time Known (months)</label>
+              <label for="time_known_months" class="gu">કેટલા મહિનાથી ઓળખો છો</label>
+              <input type="number" id="time_known_months" name="time_known_months" min="1" required>
+            </div>
+
+            <div class="field">
+              <label for="date" class="hi">तारीख</label>
+              <label for="date" class="en">Date</label>
+              <label for="date" class="gu">તારીખ</label>
+              <input type="date" id="date" name="date" required>
+            </div>
+
+            <div class="field" style="grid-column: 1 / -1;">
+              <label for="teacher_name" class="hi">शिक्षक का नाम</label>
+              <label for="teacher_name" class="en">Teacher Name</label>
+              <label for="teacher_name" class="gu">શિક્ષકનું નામ</label>
+              <input type="text" id="teacher_name" name="teacher_name" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title hi">सेक्शन 1 - स्वभाव मूल</h2>
+          <h2 class="section-title en">Section 1 - Svabhava Root</h2>
+          <h2 class="section-title gu">વિભાગ 1 - સ્વભાવ મૂળ</h2>
+
+          <div class="hint-box">
+            <p class="hi"><strong>मुख्य प्रश्न:</strong> जब बच्चा पूरी तरह मुक्त, प्रसन्न और बिना दबाव के होता है — कोई कार्य नहीं, कोई दर्शक नहीं — तब वह बार-बार क्या करता है?</p>
+            <p class="en"><strong>Main question:</strong> When the child is completely free, happy, and unobserved — no task, no audience — what do they spontaneously do again and again?</p>
+            <p class="gu"><strong>મુખ્ય પ્રશ્ન:</strong> જ્યારે બાળક સંપૂર્ણ મુક્ત, આનંદિત અને નિરીક્ષણ વગર હોય — કોઈ કામ નહીં, કોઈ દર્શક નહીં — ત્યારે તે વારંવાર શું કરે છે?</p>
+
+            <ul class="hi">
+              <li>कृपया एक-दो वास्तविक उदाहरण दें।</li>
+              <li>जो कई महीनों से लगातार दिखा है वही लिखें।</li>
+              <li>अगर बाकी सेक्शन कुछ और कहें, तब भी इस स्थिर मुक्त-व्यवहार को महत्त्व दें।</li>
+            </ul>
+            <ul class="en">
+              <li>Please include one or two real examples.</li>
+              <li>Focus on what has remained stable across months.</li>
+              <li>If other sections seem to disagree, this stable free pattern matters most.</li>
+            </ul>
+            <ul class="gu">
+              <li>કૃપા કરીને એક કે બે સાચા ઉદાહરણો આપો.</li>
+              <li>ઘણા મહિનાઓથી સ્થિર રીતે દેખાતા સ્વભાવ પર ભાર આપો.</li>
+              <li>જો બીજા વિભાગો કંઈક જુદું બતાવે તો પણ આ મુક્ત સ્વભાવને વધુ મહત્ત્વ આપો.</li>
+            </ul>
+          </div>
+
+          <label for="svabhava_root" class="hi">विस्तार से लिखें</label>
+          <label for="svabhava_root" class="en">Write freely in detail</label>
+          <label for="svabhava_root" class="gu">વિગતે મુક્ત રીતે લખો</label>
+          <textarea id="svabhava_root" name="svabhava_root" class="long-textarea" required></textarea>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title hi">सेक्शन 2 - योग (बच्चा कैसे जुड़ता है)</h2>
+          <h2 class="section-title en">Section 2 - Yoga (how the child engages)</h2>
+          <h2 class="section-title gu">વિભાગ 2 - યોગ (બાળક કેવી રીતે જોડાય છે)</h2>
+
+          <div class="hint-box">
+            <ul class="hi">
+              <li>मुक्त विकल्प मिलने पर बच्चा किस ओर खिंचता है?</li>
+              <li>क्या वह हाथ से करने, बनाने, मदद करने में खिलता है?</li>
+              <li>क्या वह कहानी, संगीत, सौंदर्य, भक्ति या भाव में पिघलता है?</li>
+              <li>क्या वह प्रश्न पूछता है, समझना चाहता है, कारण खोजता है?</li>
+              <li>क्या वह शांत बैठकर देखना, अकेले absorbed रहना पसंद करता है?</li>
+              <li>बच्चा प्रेम या उत्साह कैसे दिखाता है — काम से, भावना से, समझ से, या शांत उपस्थिति से?</li>
+              <li>उदास होने पर उसे क्या शांत करता है — काम, स्पर्श/गीत, समझाना, या अकेला शांत समय?</li>
+              <li>समूह में वह करने वाला, हृदय वाला, प्रश्नकर्ता, या शांत पर्यवेक्षक दिखता है?</li>
+            </ul>
+            <ul class="en">
+              <li>When free to choose, what does the child gravitate toward?</li>
+              <li>Do they light up through doing, building, helping, and using the hands?</li>
+              <li>Do they respond deeply to song, beauty, devotion, story, or feeling?</li>
+              <li>Do they ask questions, analyze, and seek understanding?</li>
+              <li>Do they enjoy sitting quietly, watching, and being deeply absorbed alone?</li>
+              <li>How do they show enthusiasm — through action, feeling, understanding, or quiet absorption?</li>
+              <li>When upset, what settles them — activity, comfort/song, explanation, or quiet solitude?</li>
+              <li>In a group, do they become the doer, the heart, the questioner, or the quiet observer?</li>
+            </ul>
+            <ul class="gu">
+              <li>મુક્ત પસંદગી મળે ત્યારે બાળક કઈ દિશામાં ખેંચાય છે?</li>
+              <li>શું તે હાથથી કામ કરવા, બનાવવામાં, મદદમાં ખીલી ઊઠે છે?</li>
+              <li>શું તે ગીત, સૌંદર્ય, ભક્તિ, વાર્તા કે ભાવથી ઊંડો સ્પર્શાય છે?</li>
+              <li>શું તે પ્રશ્નો પૂછે છે, સમજવા માંગે છે, કારણ શોધે છે?</li>
+              <li>શું તેને શાંતિથી બેસી નિરીક્ષણ કરવું કે એકલામાં લીન થવું ગમે છે?</li>
+              <li>તે ઉત્સાહ કેવી રીતે દર્શાવે છે — ક્રિયા દ્વારા, ભાવ દ્વારા, સમજ દ્વારા, કે શાંત લીનતા દ્વારા?</li>
+              <li>ઉદાસ કે અસ્વસ્થ થાય ત્યારે શું તેને સ્થિર કરે છે — કામ, સાંત્વના/ગીત, સમજાવટ, કે એકાંત?</li>
+              <li>જૂથમાં તે કરનાર, હૃદયવાળો, પ્રશ્નકર્તા, કે શાંત નિરીક્ષક બને છે?</li>
+            </ul>
+          </div>
+
+          <label for="yoga_observation" class="hi">जो देखा है, उदाहरणों सहित लिखें</label>
+          <label for="yoga_observation" class="en">Write what you have observed, with examples</label>
+          <label for="yoga_observation" class="gu">તમે જે જોયું છે તે ઉદાહરણો સાથે લખો</label>
+          <textarea id="yoga_observation" name="yoga_observation" class="long-textarea"></textarea>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title hi">सेक्शन 3 - वर्ण (बच्चा समूह में क्या योगदान देता है)</h2>
+          <h2 class="section-title en">Section 3 - Varna (the child’s form of contribution)</h2>
+          <h2 class="section-title gu">વિભાગ 3 - વર્ણ (બાળક જૂથમાં શું યોગદાન આપે છે)</h2>
+
+          <div class="hint-box">
+            <ul class="hi">
+              <li>साझा कार्य में बच्चा कौन-सी भूमिका स्वयं लेता है?</li>
+              <li>क्या वह गहराई से सीखकर दूसरों को समझाना चाहता है?</li>
+              <li>क्या वह व्यवस्था करता है, नेतृत्व लेता है, सुरक्षा देता है, संघर्ष का सामना करता है?</li>
+              <li>क्या वह संसाधन सँभालता है, पोषण करता है, बाँटता है, जोड़ता है?</li>
+              <li>क्या वह हाथ से श्रम, निर्माण, सफाई, सहारा देने में विश्वसनीय है?</li>
+              <li>उसे किस प्रकार के योगदान पर सबसे अधिक गर्व होता है?</li>
+              <li>वह किसके लिए उपयोगी बनता है, और कैसे?</li>
+              <li>यदि बच्चा छोटा है और बात अभी स्पष्ट नहीं है, तो “यह अभी provisional है” लिख सकते हैं।</li>
+            </ul>
+            <ul class="en">
+              <li>In a shared task, what role does the child naturally take?</li>
+              <li>Do they want to learn deeply and explain to others?</li>
+              <li>Do they organize, lead, protect, assign roles, or face conflict?</li>
+              <li>Do they manage resources, nurture growth, distribute fairly, or connect people and supplies?</li>
+              <li>Do they reliably do the hands-on work, support, carrying, cleaning, or building?</li>
+              <li>What kind of contribution makes them most proud?</li>
+              <li>Who do they become useful to, and how?</li>
+              <li>If the child is young and the pattern is not yet firm, you may write that the conclusion is provisional.</li>
+            </ul>
+            <ul class="gu">
+              <li>સામૂહિક કાર્યમાં બાળક કઈ ભૂમિકા સ્વાભાવિક રીતે લે છે?</li>
+              <li>શું તે ઊંડે શીખીને બીજાને સમજાવવા માંગે છે?</li>
+              <li>શું તે વ્યવસ્થા, નેતૃત્વ, રક્ષણ, જવાબદારી લે છે?</li>
+              <li>શું તે સંસાધનો ગોઠવે છે, પોષણ આપે છે, ન્યાયથી વહેંચે છે, લોકોને જોડે છે?</li>
+              <li>શું તે હાથનું કામ, સહાય, સફાઈ, બાંધકામ કે આધારરૂપ ભૂમિકા વિશ્વસનીય રીતે કરે છે?</li>
+              <li>તેને કયા પ્રકારના યોગદાન પર ગૌરવ થાય છે?</li>
+              <li>તે કોના માટે ઉપયોગી બને છે, અને કેવી રીતે?</li>
+              <li>જો બાળક નાનું હોય અને નમૂનો હજી સ્થિર ન હોય, તો “આ હજી provisional છે” એવું લખી શકો છો.</li>
+            </ul>
+          </div>
+
+          <label for="varna_observation" class="hi">विस्तार से लिखें</label>
+          <label for="varna_observation" class="en">Write freely in detail</label>
+          <label for="varna_observation" class="gu">વિગતે મુક્ત રીતે લખો</label>
+          <textarea id="varna_observation" name="varna_observation" class="long-textarea"></textarea>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title hi">सेक्शन 4 - कोश अवस्था (कहाँ से काम शुरू करना चाहिए)</h2>
+          <h2 class="section-title en">Section 4 - Kosha status (where work should begin)</h2>
+          <h2 class="section-title gu">વિભાગ 4 - કોષ સ્થિતિ (કામ ક્યાંથી શરૂ કરવું)</h2>
+
+          <div class="hint-box">
+            <p class="hi"><strong>हर स्तर पर जो देखा है लिखें:</strong></p>
+            <p class="en"><strong>Write what you have observed at each layer:</strong></p>
+            <p class="gu"><strong>દરેક સ્તરે તમે શું જોયું છે તે લખો:</strong></p>
+
+            <ul class="hi">
+              <li><strong>अन्नमय:</strong> शरीर, ऊर्जा, भूख, नींद, शारीरिक समन्वय, जल्दी थकना, बार-बार बीमार होना।</li>
+              <li><strong>प्राणमय:</strong> श्वास की चाल, ऊर्जा स्थिर है या बिखरी हुई, जल्दी थकता है या जल्दी सँभलता है।</li>
+              <li><strong>मनोमय:</strong> भावनात्मक स्थिरता, जल्दी चिढ़ना, पसंद-नापसंद के झूले, दुख से उबरने की गति।</li>
+              <li><strong>विज्ञानमय:</strong> स्पष्ट सोच, जिज्ञासा, ध्यान, “मुझे नहीं पता” कह पाने की क्षमता, विवेक।</li>
+              <li><strong>आनंदमय:</strong> सहज आनंद, हँसी, गहरा absorbed होना, शुद्ध प्रसन्न क्षण।</li>
+            </ul>
+            <ul class="en">
+              <li><strong>Annamaya:</strong> body, energy through the day, appetite, sleep, coordination, fatigue, illness.</li>
+              <li><strong>Pranamaya:</strong> breath pattern, scattered or steady energy, stamina, speed of recovery.</li>
+              <li><strong>Manomaya:</strong> emotional steadiness, reactivity, likes/dislikes, recovery after upset.</li>
+              <li><strong>Vijnanamaya:</strong> clarity, curiosity, focus, discernment, comfort saying “I don’t know.”</li>
+              <li><strong>Anandamaya:</strong> spontaneous joy, easy laughter, deep absorption, quiet delight.</li>
+            </ul>
+            <ul class="gu">
+              <li><strong>અન્નમય:</strong> શરીર, દિવસભરની ઊર્જા, ભૂખ, ઊંઘ, શારીરિક સમન્વય, થાક, બીમારી.</li>
+              <li><strong>પ્રાણમય:</strong> શ્વાસનો સ્વભાવ, ઊર્જા વિખરાયેલી છે કે સ્થિર, સ્ટેમિના, પુનઃસ્થાપન.</li>
+              <li><strong>મનોમય:</strong> ભાવનાત્મક સ્થિરતા, પ્રતિક્રિયા, પસંદ-નાપસંદ, દુઃખ પછી પુનઃસંતુલન.</li>
+              <li><strong>વિજ્ઞાનમય:</strong> સ્પષ્ટતા, જિજ્ઞાસા, એકાગ્રતા, “મને ખબર નથી” કહી શકવાની તૈયારી, વિવેક.</li>
+              <li><strong>આનંદમય:</strong> સહજ આનંદ, હાસ્ય, ઊંડો લીનભાવ, શાંત પ્રસન્નતા.</li>
+            </ul>
+          </div>
+
+          <label for="annamaya" class="hi">अन्नमय (Body)</label>
+          <label for="annamaya" class="en">Annamaya (Body)</label>
+          <label for="annamaya" class="gu">અન્નમય (શરીર)</label>
+          <textarea id="annamaya" name="annamaya"></textarea>
+
+          <label for="pranamaya" class="hi">प्राणमय (Energy/Breath)</label>
+          <label for="pranamaya" class="en">Pranamaya (Energy/Breath)</label>
+          <label for="pranamaya" class="gu">પ્રાણમય (ઊર્જા/શ્વાસ)</label>
+          <textarea id="pranamaya" name="pranamaya"></textarea>
+
+          <label for="manomaya" class="hi">मनोमय (Mind/Emotion)</label>
+          <label for="manomaya" class="en">Manomaya (Mind/Emotion)</label>
+          <label for="manomaya" class="gu">મનોમય (મન/ભાવ)</label>
+          <textarea id="manomaya" name="manomaya"></textarea>
+
+          <label for="vijnanamaya" class="hi">विज्ञानमय (Intellect/Discernment)</label>
+          <label for="vijnanamaya" class="en">Vijnanamaya (Intellect/Discernment)</label>
+          <label for="vijnanamaya" class="gu">વિજ્ઞાનમય (બુદ્ધિ/વિવેક)</label>
+          <textarea id="vijnanamaya" name="vijnanamaya"></textarea>
+
+          <label for="anandamaya" class="hi">आनंदमय (Joy/Absorption)</label>
+          <label for="anandamaya" class="en">Anandamaya (Joy/Absorption)</label>
+          <label for="anandamaya" class="gu">આનંદમય (આનંદ/લીનતા)</label>
+          <textarea id="anandamaya" name="anandamaya"></textarea>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title hi">सेक्शन 5 - गुण मौसम</h2>
+          <h2 class="section-title en">Section 5 - Guna weather</h2>
+          <h2 class="section-title gu">વિભાગ 5 - ગુણનું વાતાવરણ</h2>
+
+          <div class="hint-box">
+            <ul class="hi">
+              <li>हाल के समय में बच्चा अधिक शांत, स्पष्ट, संतुष्ट और सरल आनंद में दिखता है?</li>
+              <li>या अधिक सक्रिय, बेचैन, उत्तेजना-प्रिय, हमेशा कुछ करना चाहता है?</li>
+              <li>या भारी, थका, रुका हुआ, धुँधला, पीछे हटता हुआ लगता है?</li>
+              <li>दिन में, भोजन के बाद, नींद के बाद, या किसी विशेष समय में यह मौसम बदलता है क्या?</li>
+              <li>अगर बच्चा सुस्त दिख रहा है, पहले भूख, थकान, नींद जैसी साधारण वजहें भी ध्यान में रखें।</li>
+            </ul>
+            <ul class="en">
+              <li>Recently, does the child seem more calm, clear, content, and joyful in simple things?</li>
+              <li>Or more active, restless, ambitious, stimulation-seeking, unable to sit still?</li>
+              <li>Or heavy, resistant, withdrawn, foggy, or dull?</li>
+              <li>Does this weather change across the day, after food, after sleep, or at particular times?</li>
+              <li>If the child seems dull, first consider ordinary causes like hunger, fatigue, or lack of sleep.</li>
+            </ul>
+            <ul class="gu">
+              <li>તાજેતરમાં બાળક વધુ શાંત, સ્પષ્ટ, સંતોષી અને સરળ આનંદમાં દેખાય છે?</li>
+              <li>અથવા વધુ સક્રિય, બેચેન, ઉત્તેજના શોધતું, સતત કંઈક કરવાનું ઇચ્છતું દેખાય છે?</li>
+              <li>અથવા ભારે, મંદ, પાછું ખેંચાયેલું, ધૂંધળું કે નીરસ લાગે છે?</li>
+              <li>શું આ સ્થિતિ દિવસભરમાં, ખોરાક પછી, ઊંઘ પછી, કે ખાસ સમયોએ બદલાય છે?</li>
+              <li>જો બાળક મંદ લાગે તો પહેલાં ભૂખ, થાક, ઊંઘની અછત જેવી સામાન્ય કારણો પણ વિચારશો.</li>
+            </ul>
+          </div>
+
+          <label for="guna_weather" class="hi">जो देखा है, हाल के पैटर्न सहित लिखें</label>
+          <label for="guna_weather" class="en">Write the recent pattern you have observed</label>
+          <label for="guna_weather" class="gu">તાજેતરમાં તમે જે જોયું છે તે લખો</label>
+          <textarea id="guna_weather" name="guna_weather" class="long-textarea"></textarea>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title hi">सेक्शन 6 - प्रकृति / विकृति</h2>
+          <h2 class="section-title en">Section 6 - Prakriti / Vikriti</h2>
+          <h2 class="section-title gu">વિભાગ 6 - પ્રકૃતિ / વિકૃતિ</h2>
+
+          <div class="hint-box">
+            <p class="hi"><strong>प्रकृति:</strong> जो स्थिर, जन्मजात या लंबे समय से एक जैसा दिखता है। <strong>विकृति:</strong> जो अभी असंतुलन में दिख रहा है।</p>
+            <p class="en"><strong>Prakriti:</strong> the stable baseline nature. <strong>Vikriti:</strong> what seems currently out of tune.</p>
+            <p class="gu"><strong>પ્રકૃતિ:</strong> લાંબા સમયથી સ્થિર દેખાતી મૂળભૂત પ્રકૃતિ. <strong>વિકૃતિ:</strong> હાલ જે અસંતુલિત લાગે છે.</p>
+
+            <ul class="hi">
+              <li>शरीर की बनावट, त्वचा, चाल, आवाज, भूख, पाचन, नींद, गर्म/ठंडे की पसंद।</li>
+              <li>याददाश्त और सीखने का स्वभाव — जल्दी पकड़ना/जल्दी भूलना, या धीरे सीखना/लंबे समय रखना।</li>
+              <li>फिर अलग से लिखें: अभी हाल में क्या बिगड़ा हुआ या असंतुलित लग रहा है?</li>
+            </ul>
+            <ul class="en">
+              <li>Observe build, skin, movement, voice, appetite, digestion, sleep, and temperature preference.</li>
+              <li>Also note memory style and learning temperament.</li>
+              <li>Then separately describe what seems currently disturbed or out of tune.</li>
+            </ul>
+            <ul class="gu">
+              <li>શરીરરચના, ત્વચા, ચાલ, અવાજ, ભૂખ, પાચન, ઊંઘ, ગરમી/ઠંડીની પસંદનું નિરીક્ષણ કરો.</li>
+              <li>સ્મૃતિ અને શીખવાની રીત પણ નોંધો.</li>
+              <li>પછી અલગથી લખો કે હમણાં શું અસંતુલિત લાગે છે.</li>
+            </ul>
+          </div>
+
+          <label for="prakriti_baseline" class="hi">स्थिर आधार / प्रकृति</label>
+          <label for="prakriti_baseline" class="en">Stable baseline / Prakriti</label>
+          <label for="prakriti_baseline" class="gu">સ્થિર આધાર / પ્રકૃતિ</label>
+          <textarea id="prakriti_baseline" name="prakriti_baseline"></textarea>
+
+          <label for="vikriti_current" class="hi">अभी की विकृति / असंतुलन</label>
+          <label for="vikriti_current" class="en">Current vikriti / imbalance</label>
+          <label for="vikriti_current" class="gu">હાલની વિકૃતિ / અસંતુલન</label>
+          <textarea id="vikriti_current" name="vikriti_current"></textarea>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title hi">सेक्शन 7 - प्रतिभाएँ, संवेदनशीलताएँ, readiness</h2>
+          <h2 class="section-title en">Section 7 - Talents, sensitivities, readiness</h2>
+          <h2 class="section-title gu">વિભાગ 7 - પ્રતિભાઓ, સંવેદનશીલતા, તૈયારી</h2>
+
+          <div class="hint-box">
+            <ul class="hi">
+              <li>कला, तर्क, सेवा, नेतृत्व, गति, ध्यान, तकनीकी, भाषा, स्मरण — जो भी विशेष दिखा हो लिखें।</li>
+              <li>ध्वनि, प्रकाश, स्पर्श, भीड़, नए स्थान, क्रोध, उदासी, जल्दी थकना जैसी संवेदनशीलताएँ लिखें।</li>
+              <li>धीमी गतिविधि, समूह कार्य, अकेले काम, अध्ययन, सेवा, sensory reduction जैसी चीज़ों में बच्चा कैसा करता है?</li>
+            </ul>
+            <ul class="en">
+              <li>Write any notable gifts in arts, logic, service, leadership, movement, contemplation, technical work, language, or memory.</li>
+              <li>Describe sensitivities such as sound, light, texture, crowds, new situations, anger, sadness, or tiring easily.</li>
+              <li>How does the child do with slow work, group work, solitary work, study, service, or reduced-sensory activities?</li>
+            </ul>
+            <ul class="gu">
+              <li>કલા, તર્ક, સેવા, નેતૃત્વ, ગતિ, ધ્યાન, ટેક્નિકલ કામ, ભાષા, સ્મૃતિ જેવી પ્રતિભાઓ લખો.</li>
+              <li>ધ્વનિ, પ્રકાશ, સ્પર્શ, ભીડ, નવી સ્થિતિ, ગુસ્સો, ઉદાસી, જલ્દી થાકવું જેવી સંવેદનશીલતાઓ લખો.</li>
+              <li>ધીમું કામ, જૂથ કાર્ય, એકલ કાર્ય, અભ્યાસ, સેવા, કે ઓછી ઇન્દ્રિય-ઉત્તેજનાવાળી પ્રવૃત્તિમાં બાળક કેમ કરે છે?</li>
+            </ul>
+          </div>
+
+          <label for="talents" class="hi">प्रतिभाएँ / gifts</label>
+          <label for="talents" class="en">Talents / gifts</label>
+          <label for="talents" class="gu">પ્રતિભાઓ / gifts</label>
+          <textarea id="talents" name="talents"></textarea>
+
+          <label for="sensitivities" class="hi">संवेदनशीलताएँ / sensitivities</label>
+          <label for="sensitivities" class="en">Sensitivities</label>
+          <label for="sensitivities" class="gu">સંવેદનશીલતાઓ</label>
+          <textarea id="sensitivities" name="sensitivities"></textarea>
+
+          <label for="practice_readiness" class="hi">तैयारी / readiness / किस प्रकार की साधना या कार्य में बच्चा सहज है</label>
+          <label for="practice_readiness" class="en">Readiness / what types of practice or work suit the child right now</label>
+          <label for="practice_readiness" class="gu">તૈયારી / હાલ કઈ પ્રકારની પ્રવૃત્તિ બાળકને અનુકૂળ છે</label>
+          <textarea id="practice_readiness" name="practice_readiness"></textarea>
+        </div>
+
+        <div class="submit-wrap">
+          <button class="submit-btn" id="submitBtn" type="submit">जमा करें / Submit</button>
+          <div id="statusBox" class="status"></div>
+          <div class="small-note hi">जमा करने के बाद परिणाम नीचे दिखाई देगा।</div>
+          <div class="small-note en">After submission, the result will appear below.</div>
+          <div class="small-note gu">જમા કર્યા પછી પરિણામ નીચે દેખાશે.</div>
+        </div>
+      </form>
     </div>
-
-    <h1 class="hi">चर्चा: शिक्षक आंकलन प्रश्नावली</h1>
-    <h1 class="en">Teacher Observation Questionnaire - Gurukul</h1>
-
-    <form id="observation-form">
-      <div class="section">
-        <h2 class="hi">सेक्शन 0 - संदर्भ</h2>
-        <h2 class="en">Section 0 - Context</h2>
-
-        <label for="student_name" class="hi">छात्र का नाम</label>
-        <label for="student_name" class="en">Student Name</label>
-        <input type="text" id="student_name" name="student_name" required>
-
-        <label for="age" class="hi">उम्र</label>
-        <label for="age" class="en">Age</label>
-        <input type="number" id="age" name="age" min="3" max="25" required>
-
-        <label for="time_known_months" class="hi">जानने का समय (महीनों में)</label>
-        <label for="time_known_months" class="en">Months Known</label>
-        <input type="number" id="time_known_months" name="time_known_months" min="1" required>
-
-        <label for="date" class="hi">तारीख</label>
-        <label for="date" class="en">Date</label>
-        <input type="date" id="date" name="date" required>
-
-        <label for="teacher_name" class="hi">शिक्षक का नाम</label>
-        <label for="teacher_name" class="en">Teacher Name</label>
-        <input type="text" id="teacher_name" name="teacher_name" required>
-      </div>
-
-      <div class="section">
-        <h2 class="hi">सेक्शन 1 - स्वभाव मूल</h2>
-        <h2 class="en">Section 1 - Svabhava Root</h2>
-
-        <label for="svabhava_root" class="hi">विवरण</label>
-        <label for="svabhava_root" class="en">Description</label>
-        <textarea id="svabhava_root" name="svabhava_root" required></textarea>
-      </div>
-
-      <div class="section">
-        <h2 class="hi">सेक्शन 2 - योग</h2>
-        <h2 class="en">Section 2 - Yoga</h2>
-
-        <label for="primary_yoga" class="hi">मुख्य योग</label>
-        <label for="primary_yoga" class="en">Primary Yoga</label>
-        <select id="primary_yoga" name="primary_yoga">
-          <option value="">Select / चुनें</option>
-          <option value="Karma">कर्म - Karma</option>
-          <option value="Bhakti">भक्ति - Bhakti</option>
-          <option value="Jnana">ज्ञान - Jnana</option>
-          <option value="Raja">राज - Raja</option>
-        </select>
-      </div>
-
-      <div class="section">
-        <h2 class="hi">सेक्शन 3 - वर्ण</h2>
-        <h2 class="en">Section 3 - Varna</h2>
-
-        <label for="varna_tendency" class="hi">वर्ण प्रवृत्ति</label>
-        <label for="varna_tendency" class="en">Varna Tendency</label>
-        <select id="varna_tendency" name="varna_tendency">
-          <option value="">Select / चुनें</option>
-          <option value="Brahmin">ब्राह्मण - Brahmin</option>
-          <option value="Kshatriya">क्षत्रिय - Kshatriya</option>
-          <option value="Vaishya">वैश्य - Vaishya</option>
-          <option value="Shudra">शूद्र - Shudra</option>
-        </select>
-      </div>
-
-      <div class="section">
-        <h2 class="hi">सेक्शन 4 - कोशा</h2>
-        <h2 class="en">Section 4 - Kosha</h2>
-
-        <label for="annamaya" class="hi">अन्नमाया / Body</label>
-        <label for="annamaya" class="en">Annamaya / Body</label>
-        <textarea id="annamaya" name="annamaya"></textarea>
-
-        <label for="pranamaya" class="hi">प्राणमाया / Energy</label>
-        <label for="pranamaya" class="en">Pranamaya / Energy</label>
-        <textarea id="pranamaya" name="pranamaya"></textarea>
-
-        <label for="manomaya" class="hi">मनोमाया / Mind</label>
-        <label for="manomaya" class="en">Manomaya / Mind</label>
-        <textarea id="manomaya" name="manomaya"></textarea>
-
-        <label for="vijnanamaya" class="hi">विज्ञानमाया / Intellect</label>
-        <label for="vijnanamaya" class="en">Vijnanamaya / Intellect</label>
-        <textarea id="vijnanamaya" name="vijnanamaya"></textarea>
-      </div>
-
-      <div class="section">
-        <h2 class="hi">सेक्शन 5 - गुण</h2>
-        <h2 class="en">Section 5 - Guna</h2>
-
-        <label for="dominant_guna" class="hi">प्रधान गुण</label>
-        <label for="dominant_guna" class="en">Dominant Guna</label>
-        <select id="dominant_guna" name="dominant_guna">
-          <option value="">Select / चुनें</option>
-          <option value="Sattva">सत्त्व - Sattva</option>
-          <option value="Rajas">रजस - Rajas</option>
-          <option value="Tamas">तमस - Tamas</option>
-        </select>
-      </div>
-
-      <div class="section">
-        <h2 class="hi">सेक्शन 6 - प्रकृति</h2>
-        <h2 class="en">Section 6 - Prakriti</h2>
-
-        <label for="dominant_prakriti" class="hi">प्रधान प्रकृति</label>
-        <label for="dominant_prakriti" class="en">Dominant Prakriti</label>
-        <select id="dominant_prakriti" name="dominant_prakriti">
-          <option value="">Select / चुनें</option>
-          <option value="Vata">वात - Vata</option>
-          <option value="Pitta">पित्त - Pitta</option>
-          <option value="Kapha">कफ - Kapha</option>
-        </select>
-      </div>
-
-      <div class="section">
-        <h2 class="hi">सेक्शन 7 - अन्य</h2>
-        <h2 class="en">Section 7 - Other</h2>
-
-        <label for="talents" class="hi">प्रतिभाएँ / Talents</label>
-        <label for="talents" class="en">Talents</label>
-        <textarea id="talents" name="talents"></textarea>
-
-        <label for="sensitivities" class="hi">संवेदनशीलता / Sensitivities</label>
-        <label for="sensitivities" class="en">Sensitivities</label>
-        <textarea id="sensitivities" name="sensitivities"></textarea>
-      </div>
-
-      <button class="submit-btn" id="submitBtn" type="submit">जमा करें / Submit</button>
-      <div id="statusBox" class="status"></div>
-      <div class="small-note hi">जमा करने के बाद परिणाम नीचे दिखाई देगा।</div>
-      <div class="small-note en">After submission, the result will appear below.</div>
-    </form>
   </div>
 
   <script>
     const WORKER_URL = "https://floral-math-95fa.maniskul.workers.dev/submit";
 
     function toggleLang(lang) {
-      document.querySelectorAll('.hi').forEach(el => {
-        el.style.display = lang === 'hi' ? 'block' : 'none';
+      document.querySelectorAll(".hi, .en, .gu").forEach(el => {
+        el.style.display = "none";
       });
-      document.querySelectorAll('.en').forEach(el => {
-        el.style.display = lang === 'en' ? 'block' : 'none';
+      document.querySelectorAll("." + lang).forEach(el => {
+        el.style.display = el.tagName === "LI" ? "list-item" : "block";
       });
+    }
+
+    function safe(v) {
+      return (v || "").trim();
     }
 
     function buildMessage(payload) {
       return [
-        `Teacher Observation Submission`,
-        `Student Name: ${payload.student_name || ""}`,
-        `Age: ${payload.age || ""}`,
-        `Months Known: ${payload.time_known_months || ""}`,
-        `Date: ${payload.date || ""}`,
-        `Teacher Name: ${payload.teacher_name || ""}`,
-        `Svabhava Root: ${payload.svabhava_root || ""}`,
-        `Primary Yoga: ${payload.primary_yoga || ""}`,
-        `Varna Tendency: ${payload.varna_tendency || ""}`,
-        `Annamaya: ${payload.annamaya || ""}`,
-        `Pranamaya: ${payload.pranamaya || ""}`,
-        `Manomaya: ${payload.manomaya || ""}`,
-        `Vijnanamaya: ${payload.vijnanamaya || ""}`,
-        `Dominant Guna: ${payload.dominant_guna || ""}`,
-        `Dominant Prakriti: ${payload.dominant_prakriti || ""}`,
-        `Talents: ${payload.talents || ""}`,
-        `Sensitivities: ${payload.sensitivities || ""}`
+        "Teacher Observation Submission",
+        `Student Name: ${payload.student_name}`,
+        `Age: ${payload.age}`,
+        `Time Known (months): ${payload.time_known_months}`,
+        `Date: ${payload.date}`,
+        `Teacher Name: ${payload.teacher_name}`,
+        "",
+        "SECTION 1 - SVABHAVA ROOT",
+        payload.svabhava_root,
+        "",
+        "SECTION 2 - YOGA OBSERVATION",
+        payload.yoga_observation,
+        "",
+        "SECTION 3 - VARNA OBSERVATION",
+        payload.varna_observation,
+        "",
+        "SECTION 4 - KOSHA STATUS",
+        `Annamaya: ${payload.annamaya}`,
+        `Pranamaya: ${payload.pranamaya}`,
+        `Manomaya: ${payload.manomaya}`,
+        `Vijnanamaya: ${payload.vijnanamaya}`,
+        `Anandamaya: ${payload.anandamaya}`,
+        "",
+        "SECTION 5 - GUNA WEATHER",
+        payload.guna_weather,
+        "",
+        "SECTION 6 - PRAKRITI / VIKRITI",
+        `Prakriti baseline: ${payload.prakriti_baseline}`,
+        `Current vikriti: ${payload.vikriti_current}`,
+        "",
+        "SECTION 7 - TALENTS / SENSITIVITIES / READINESS",
+        `Talents: ${payload.talents}`,
+        `Sensitivities: ${payload.sensitivities}`,
+        `Practice readiness: ${payload.practice_readiness}`
       ].join("\n");
     }
 
@@ -290,23 +663,27 @@
       submitBtn.textContent = "Submitting...";
 
       const detailedPayload = {
-        student_name: form.student_name.value.trim(),
-        age: form.age.value.trim(),
-        time_known_months: form.time_known_months.value.trim(),
-        date: form.date.value.trim(),
-        teacher_name: form.teacher_name.value.trim(),
-        svabhava_root: form.svabhava_root.value.trim(),
-        primary_yoga: form.primary_yoga.value,
-        supporting_yoga: "",
-        varna_tendency: form.varna_tendency.value,
-        annamaya: form.annamaya.value.trim(),
-        pranamaya: form.pranamaya.value.trim(),
-        manomaya: form.manomaya.value.trim(),
-        vijnanamaya: form.vijnanamaya.value.trim(),
-        dominant_guna: form.dominant_guna.value,
-        dominant_prakriti: form.dominant_prakriti.value,
-        talents: form.talents.value.trim(),
-        sensitivities: form.sensitivities.value.trim()
+        form_type: "teacher_observation_questionnaire",
+        student_name: safe(form.student_name.value),
+        age: safe(form.age.value),
+        time_known_months: safe(form.time_known_months.value),
+        date: safe(form.date.value),
+        teacher_name: safe(form.teacher_name.value),
+        svabhava_root: safe(form.svabhava_root.value),
+        yoga_observation: safe(form.yoga_observation.value),
+        varna_observation: safe(form.varna_observation.value),
+        annamaya: safe(form.annamaya.value),
+        pranamaya: safe(form.pranamaya.value),
+        manomaya: safe(form.manomaya.value),
+        vijnanamaya: safe(form.vijnanamaya.value),
+        anandamaya: safe(form.anandamaya.value),
+        guna_weather: safe(form.guna_weather.value),
+        prakriti_baseline: safe(form.prakriti_baseline.value),
+        vikriti_current: safe(form.vikriti_current.value),
+        talents: safe(form.talents.value),
+        sensitivities: safe(form.sensitivities.value),
+        practice_readiness: safe(form.practice_readiness.value),
+        source_language_ui: document.documentElement.lang || "hi"
       };
 
       const payload = {
@@ -330,18 +707,20 @@
         if (res.ok && data.ok) {
           statusBox.className = "status success";
           statusBox.textContent =
-            "जमा हो गया! / Submitted successfully!\n\nSubmission ID: " + (data.id || "N/A");
+            "जमा हो गया! / Submitted successfully! / સફળતાપૂર્વક જમા થયું!\n\nSubmission ID: " +
+            (data.id || "N/A");
           form.reset();
         } else {
           statusBox.className = "status error";
           statusBox.textContent =
-            "जमा नहीं हो सका / Submission failed\n\n" +
+            "जमा नहीं हो सका / Submission failed / જમા થઈ શક્યું નથી\n\n" +
             JSON.stringify(data, null, 2);
         }
       } catch (error) {
         statusBox.className = "status error";
         statusBox.textContent =
-          "नेटवर्क या सर्वर त्रुटि / Network or server error\n\n" + error.message;
+          "नेटवर्क या सर्वर त्रुटि / Network or server error / નેટવર્ક અથવા સર્વર ભૂલ\n\n" +
+          error.message;
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = "जमा करें / Submit";
