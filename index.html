@@ -3,67 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>शिक्षक आंकलन प्रश्नावली - गुरुकुल</title>
+    <title>चर्चा: शिक्षक आंकलन प्रश्नावली - गुरुकुल</title>
     <style>
-        @font-face {
-            font-family: 'NotoSansDevanagari';
-            src: url('file:///C:/Users/fry83/AppData/Local/Temp/NotoSansDevanagari-Regular.ttf') format('truetype');
-        }
-        @font-face {
-            font-family: 'NotoSansGujarati';
-            src: url('file:///C:/Users/fry83/AppData/Local/Temp/NotoSansGujarati-Regular.ttf') format('truetype');
-        }
-        * { box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', 'NotoSansDevanagari', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 { color: #2c5aa0; text-align: center; margin-bottom: 10px; }
-        h2 { color: #4a752c; border-bottom: 2px solid #4a752c; padding-bottom: 8px; margin-top: 30px; }
-        h3 { color: #8b4513; margin-top: 20px; }
-        .section { margin: 25px 0; padding: 20px; background: #fafafa; border-left: 4px solid #2c5aa0; }
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 20px; background: #f9f9f9; }
+        .container { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h1, h2 { color: #2c5aa0; }
         .lang-toggle { text-align: center; margin: 15px 0; }
         .lang-toggle button { margin: 0 5px; padding: 8px 16px; cursor: pointer; }
-        label { display: block; margin: 10px 0 5px; font-weight: 500; }
-        input, textarea, select {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-family: inherit;
-        }
-        textarea { min-height: 100px; resize: vertical; }
-        .checkbox-group, .radio-group { margin: 10px 0; }
-        .checkbox-group label, .radio-group label {
-            display: inline-block;
-            margin-right: 20px;
-            font-weight: normal;
-        }
-        button {
-            background: #2c5aa0;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
+        label { display: block; margin: 12px 0 4px; font-weight: 500; }
+        input, textarea, select { width: 100%; padding: 10px; margin: 6px 0; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+        textarea { min-height: 80px; }
+        .section { margin: 18px 0; padding: 15px; background: #fafafa; border-left: 3px solid #4a752c; }
+        button { background: #2c5aa0; color: white; padding: 12px 25px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
         button:hover { background: #1a4080; }
-        .note { font-style: italic; color: #666; font-size: 14px; }
-        .important { background: #fff3cd; padding: 10px; border-left: 3px solid #ffc107; margin: 10px 0; }
         .hi { display: block; }
         .en { display: none; }
     </style>
@@ -77,206 +29,141 @@
         
         <h1 class="hi">चर्चा: शिक्षक आंकलन प्रश्नावली</h1>
         <h1 class="en">Teacher Observation Questionnaire - Gurukul</h1>
-        
-        <p class="note hi" style="text-align: center;">इंटेक्कस मामला 2 — एक शिक्षक के लिए आंकलन प्रश्नावली और 3-अक्ष पढ़ाई<br>जो छात्र को 1+ साल से जानता है/काम करता है</p>
-        <p class="note en" style="text-align: center;">Intake Case 2 — Teacher Observation Questionnaire &amp; 3-Axes Analysis<br>For a teacher who has known/worked with the student for 1+ year</p>
 
-
-            
-            <!-- SECTION 0 — CONTEXT -->
+        <form id="observation-form">
             <div class="section">
-                <h2 class="hi">सेक्शन 0 — संदर्भ</h2>
-                <h2 class="en">Section 0 — Context</h2>
-                
+                <h2 class="hi">सेक्शन 0 - संदर्भ</h2>
+                <h2 class="en">Section 0 - Context</h2>
                 <label class="hi">छात्र का नाम: <input type="text" name="student_name" required></label>
                 <label class="en">Student Name: <input type="text" name="student_name" required></label>
-                
                 <label class="hi">उम्र: <input type="number" name="age" min="3" max="25" required></label>
                 <label class="en">Age: <input type="number" name="age" min="3" max="25" required></label>
-                
                 <label class="hi">जानने का समय (महीनों में): <input type="number" name="time_known_months" min="1" required></label>
-                <label class="en">Time Known (months): <input type="number" name="time_known_months" min="1" required></label>
-                
+                <label class="en">Months Known: <input type="number" name="time_known_months" min="1" required></label>
                 <label class="hi">तारीख: <input type="date" name="date" required></label>
                 <label class="en">Date: <input type="date" name="date" required></label>
-                
                 <label class="hi">शिक्षक का नाम: <input type="text" name="teacher_name" required></label>
                 <label class="en">Teacher Name: <input type="text" name="teacher_name" required></label>
             </div>
 
-            <!-- SECTION 1 — SVABHAVA ROOT -->
             <div class="section">
-                <h2 class="hi">सेक्शन 1 — स्वभाव मूल (सबसे प्रमुख प्रश्न)</h2>
-                <h2 class="en">Section 1 — Svabhava Root (Most Revealing)</h2>
-                
-                <p class="important hi">जब यह बच्चा पूरी तरह से स्वतंत्र, खुश और अनजागर — कोई काम नहीं, कोई दर्शक भी नहीं — तो वह क्या स्वयं चाहता है, महीनों पर फिसलता हुआ?</p>
-                <p class="important en">When this child is completely free, happy, and unobserved — no task, no audience — what do they spontaneously do, again and again, across months?</p>
-                
-                <textarea name="svabhava_root" class="hi" placeholder="बच्चा आज़ाद होते हुए क्या करता है..."></textarea>
-                <textarea name="svabhava_root" class="en" placeholder="Write specific examples of what the child does when free..."></textarea>
+                <h2 class="hi">सेक्शन 1 - स्वभाव मूल</h2>
+                <h2 class="en">Section 1 - Svabhava Root</h2>
+                <textarea name="svabhava_root" required></textarea>
             </div>
 
-            <!-- SECTION 2 — YOGA -->
             <div class="section">
-                <h2 class="hi">सेक्शन 2 — अक्ष 2: योग ( ंदरूनी स्वाद — कैसे जुड़ते हैं)</h2>
-                <h2 class="en">Section 2 — Axis 2: Yoga (Inner Flavour)</h2>
-
-                <h3 class="hi">गतिविधि वरीयता:</h3>
-                <h3 class="en">Activity Preference:</h3>
-                
-                <div class="hi checkbox-group">
-                    <label><input type="checkbox" name="yoga_activities_hi" value="हाथों_के_साथ"> हाथों से करना/बनाना/मदद करना</label>
-                    <label><input type="checkbox" name="yoga_activities_hi" value="गावते_समय"> गाना/उत्सव/सौंदर्य से भाव विकसित</label>
-                    <label><input type="checkbox" name="yoga_activities_hi" value="सवाल_पूछना"> सवाल पूछना/समझना</label>
-                    <label><input type="checkbox" name="yoga_activities_hi" value="चुप_चालना"> चुपचाप बैठना, देखना</label>
-                </div>
-
-                <div class="en checkbox-group">
-                    <label><input type="checkbox" name="yoga_activities" value="hands_doing"> Hands-on doing/building/helping</label>
-                    <label><input type="checkbox" name="yoga_activities" value="singing_celebrating"> Singing/celebrating/moved by beauty</label>
-                    <label><input type="checkbox" name="yoga_activities" value="questioning_asking"> Asking questions/figuring things out</label>
-                    <label><input type="checkbox" name="yoga_activities" value="quiet_absorbed"> Sitting quietly, watching, absorbed</label>
-                </div>
-
-                <h3 class="hi">प्रिय प्रकार का योग:</h3>
-                <h3 class="en">Primary Yoga:</h3>
-                
-                <div class="hi radio-group">
-                    <label><input type="radio" name="primary_yoga_hi" value="कर्म"> कर्म (कार्य/सेवा)</label>
-                    <label><input type="radio" name="primary_yoga_hi" value="भक्ति"> भक्ति (भक्ति/भाव)</label>
-                    <label><input type="radio" name="primary_yoga_hi" value="ज्ञान"> ज्ञान (ज्ञान/प्रश्न)</label>
-                    <label><input type="radio" name="primary_yoga_hi" value="राज"> राज (चिंतन/विलास)</label>
-                </div>
-
-                <div class="en radio-group">
-                    <label><input type="radio" name="primary_yoga" value="karma"> Karma (action/servitude)</label>
-                    <label><input type="radio" name="primary_yoga" value="bhakti"> Bhakti (devotion/feeling)</label>
-                    <label><input type="radio" name="primary_yoga" value="jnana"> Jnana (knowledge/questioning)</label>
-                    <label><input type="radio" name="primary_yoga" value="raja"> Raja (contemplation/absorption)</label>
-                </div>
-
-                <label class="hi">अतिरिक्त टिप्पणी:<textarea name="yoga_notes_hi"></textarea></label>
-                <label class="en">Additional notes:<textarea name="yoga_notes"></textarea></label>
+                <h2 class="hi">सेक्शन 2 - योग</h2>
+                <h2 class="en">Section 2 - Yoga</h2>
+                <label>Primary Yoga:
+                    <select name="primary_yoga">
+                        <option value="">Select / चुनें</option>
+                        <option value="Karma">कर्म - Karma</option>
+                        <option value="Bhakti">भक्ति - Bhakti</option>
+                        <option value="Jnana">ज्ञान - Jnana</option>
+                        <option value="Raja">राज - Raja</option>
+                    </select>
+                </label>
             </div>
 
-            <!-- SECTION 3 — VARNA -->
             <div class="section">
-                <h2 class="hi">सेक्शन 3 — अक्ष 3: वर्ण (अंदरूनी स्वाद)</h2>
-                <h2 class="en">Section 3 — Axis 3: Varna (Form of Offering)</h2>
-
-                <h3 class="hi">साझा कार्यों में स्वाभाविक भूमिका:</h3>
-                <h3 class="en">Natural Role in Shared Tasks:</h3>
-
-                <div class="hi checkbox-group">
-                    <label><input type="checkbox" name="varna_roles_hi" value="ज्ञान_सिखाना"> गहरा ज्ञान लेना और दूसरों को सिखाना</label>
-                    <label><input type="checkbox" name="varna_roles_hi" value="नेतृत्व_संरक्षण"> संगठित करना, संरक्षण करना</label>
-                    <label><input type="checkbox" name="varna_roles_hi" value="पोषण_वितरण"> संसाधनों की योजना, पोषण</label>
-                    <label><input type="checkbox" name="varna_roles_hi" value="सेवा_कार्य"> हाथों से काम करना, सेवा</label>
-                </div>
-
-                <div class="en checkbox-group">
-                    <label><input type="checkbox" name="varna_roles[]" value="teaching_knowledge"> Learn deeply and teach others (knowledge)</label>
-                    <label><input type="checkbox" name="varna_roles[]" value="leadership_protect"> Organize, take charge, protect weaker (leadership)</label>
-                    <label><input type="checkbox" name="varna_roles[]" value="provision_nurture"> Plan resources, nurture, share fairly (provision)</label>
-                    <label><input type="checkbox" name="varna_roles[]" value="service_foundation"> Hands-on labor, dependable support (service)</label>
-                </div>
-
-                <label class="hi">प्रकार्य सम्बंधी:<select name="varna_tendency_hi">
-                    <option value="">चुनें...</option>
-                    <option>ब्राह्मण (ज्ञान/शिक्षण)</option>
-                    <option>क्षत्रिय (नेतृत्व/संरक्षण)</option>
-                    <option>वैश्य (पोषण/समर्थन)</option>
-                    <option>शूद्र (सेवा/साधना)</option>
-                </select></label>
-
-                <label class="en">Varna tendency:<select name="varna_tendency">
-                    <option value="">Select...</option>
-                    <option>Brahmin (knowledge)</option>
-                    <option>Kshatriya (leadership)</option>
-                    <option>Vaishya (provision)</option>
-                    <option>Shudra (service)</option>
-                </select></label>
+                <h2 class="hi">सेक्शन 3 - वर्ण</h2>
+                <h2 class="en">Section 3 - Varna</h2>
+                <label>Varna Tendency:
+                    <select name="varna_tendency">
+                        <option value="">Select / चुनें</option>
+                        <option value="Brahmin">ब्राह्मण - Brahmin</option>
+                        <option value="Kshatriya">क्षत्रिय - Kshatriya</option>
+                        <option value="Vaishya">वैश्य - Vaishya</option>
+                        <option value="Shudra">शूद्र - Shudra</option>
+                    </select>
+                </label>
             </div>
 
-            <!-- SECTION 4 — KOSHA STATUS -->
             <div class="section">
-                <h2 class="hi">सेक्शन 4 — अक्ष 1: कोशा स्थिति</h2>
-                <h2 class="en">Section 4 — Axis 1: Kosha Status</h2>
-
-                <label class="hi">अन्नमाया (शरीर):<textarea name="annamaya_hi"></textarea></label>
-                <label class="en">Annamaya (body):<textarea name="annamaya"></textarea></label>
-
-                <label class="hi">प्राणमाया (ऊर्जा):<textarea name="pranamaya_hi"></textarea></label>
-                <label class="en">Pranamaya (energy):<textarea name="pranamaya"></textarea></label>
-
-                <label class="hi">मनोमाया (मन):<textarea name="manomaya_hi"></textarea></label>
-                <label class="en">Manomaya (mind/emotion):<textarea name="manomaya"></textarea></label>
-
-                <label class="hi">विज्ञानमाया (बुद्धि):<textarea name="vijnanamaya_hi"></textarea></label>
-                <label class="en">Vijnanamaya (intellect):<textarea name="vijnanamaya"></textarea></label>
+                <h2 class="hi">सेक्शन 4 - कोशा</h2>
+                <h2 class="en">Section 4 - Kosha</h2>
+                <textarea name="annamaya" placeholder="अन्नमाया / Body"></textarea>
+                <textarea name="pranamaya" placeholder="प्राणमाया / Energy"></textarea>
+                <textarea name="manomaya" placeholder="मनोमाया / Mind"></textarea>
+                <textarea name="vijnanamaya" placeholder="विज्ञानमाया / Intellect"></textarea>
             </div>
 
-            <!-- SECTION 5 — GUNA -->
             <div class="section">
-                <h2 class="hi">सेक्शन 5 — गुण वायु</h2>
-                <h2 class="en">Section 5 — Guna Weather</h2>
-
-                <div class="hi checkbox-group">
-                    <label><input type="checkbox" name="guna_patterns_hi" value="सत्त्व"> शान्त, स्पष्ट, संतोषी (सत्त्व)</label>
-                    <label><input type="checkbox" name="guna_patterns_hi" value="रजस"> सक्रिय, व्यसनी, विक्षोभी (रजस)</label>
-                    <label><input type="checkbox" name="guna_patterns_hi" value="तमस"> गाढ़ा, तनावित (तमस)</label>
-                </div>
-
-                <div class="en checkbox-group">
-                    <label><input type="checkbox" name="guna_patterns[]" value="sattva"> Calm, clear, content (sattva)</label>
-                    <label><input type="checkbox" name="guna_patterns[]" value="rajas"> Active, restless (rajas)</label>
-                    <label><input type="checkbox" name="guna_patterns[]" value="tamas"> Heavy, dull (tamas)</label>
-                </div>
+                <h2 class="hi">सेक्शन 5 - गुण</h2>
+                <h2 class="en">Section 5 - Guna</h2>
+                <select name="dominant_guna">
+                    <option value="">Select / चुनें</option>
+                    <option value="Sattva">सत्त्व - Sattva</option>
+                    <option value="Rajas">रजस - Rajas</option>
+                    <option value="Tamas">तमस - Tamas</option>
+                </select>
             </div>
 
-            <!-- SECTION 6 — PRAKRITI -->
             <div class="section">
-                <h2 class="hi">सेक्शन 6 — प्रकृति</h2>
-                <h2 class="en">Section 6 — Prakriti</h2>
-
-                <label class="hi">प्रमुख प्रकृति:<select name="dominant_prakriti_hi">
-                    <option value="">चुनें...</option>
-                    <option>वात</option>
-                    <option>पित्त</option>
-                    <option>कफ</option>
-                </select></label>
-
-                <label class="en">Dominant Prakriti:<select name="dominant_prakriti">
-                    <option value="">Select...</option>
-                    <option>Vata</option>
-                    <option>Pitta</option>
-                    <option>Kapha</option>
-                </select></label>
+                <h2 class="hi">सेक्शन 6 - प्रकृति</h2>
+                <h2 class="en">Section 6 - Prakriti</h2>
+                <select name="dominant_prakriti">
+                    <option value="">Select / चुनें</option>
+                    <option value="Vata">वात - Vata</option>
+                    <option value="Pitta">पित्त - Pitta</option>
+                    <option value="Kapha">कफ - Kapha</option>
+                </select>
             </div>
 
-            <!-- SECTION 7 — TALENTS -->
             <div class="section">
-                <h2 class="hi">सेक्शन 7 — प्रतिभा व रुचि</h2>
-                <h2 class="en">Section 7 — Talents & Readiness</h2>
-
-                <label class="hi">प्रतिभाएँ:<textarea name="talents_hi" placeholder="कला, तर्क, सेवा, नेतृत्व..."></textarea></label>
-                <label class="en">Talents:<textarea name="talents" placeholder="Arts, logic, service, leadership..."></textarea></label>
-
-                <label class="hi">संवेदनशीलता:<textarea name="sensitivities_hi"></textarea></label>
-                <label class="en">Sensitivities:<textarea name="sensitivities"></textarea></label>
+                <h2 class="hi">सेक्शन 7 - अन्य</h2>
+                <h2 class="en">Section 7 - Other</h2>
+                <textarea name="talents" placeholder="प्रतिभाएँ / Talents"></textarea>
+                <textarea name="sensitivities" placeholder="संवेदनशीलता / Sensitivities"></textarea>
             </div>
 
-            <button type="submit" class="hi">आंकलन जमा करें</button>
-            <button type="submit" class="en">Submit Observation</button>
+            <button type="submit">जमा करें / Submit</button>
         </form>
     </div>
 
     <script>
+        document.getElementById('observation-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const payload = {
+                student_name: form.student_name.value.trim(),
+                age: form.age.value.trim(),
+                time_known_months: form.time_known_months.value.trim(),
+                date: form.date.value.trim(),
+                teacher_name: form.teacher_name.value.trim(),
+                svabhava_root: form.svabhava_root.value.trim(),
+                primary_yoga: form.primary_yoga.value,
+                supporting_yoga: "",
+                varna_tendency: form.varna_tendency.value,
+                annamaya: form.annamaya.value,
+                pranamaya: form.pranamaya.value,
+                manomaya: form.manomaya.value,
+                vijnanamaya: form.vijnanamaya.value,
+                dominant_guna: form.dominant_guna.value,
+                dominant_prakriti: form.dominant_prakriti.value,
+                talents: form.talents.value,
+                sensitivities: form.sensitivities.value
+            };
+
+            const res = await fetch("https://floral-math-95fa.maniskul.workers.dev/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await res.json();
+            alert('जमा हो गया! / Submitted!');
+            form.reset();
+        });
+
         function toggleLang(lang) {
             document.querySelectorAll('.hi').forEach(e => e.style.display = lang === 'hi' ? 'block' : 'none');
             document.querySelectorAll('.en').forEach(e => e.style.display = lang === 'en' ? 'block' : 'none');
         }
-        // Default to Hindi
         toggleLang('hi');
     </script>
 </body>
