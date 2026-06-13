@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>चर्चा: शिक्षक आंकलन प्रश्नावली - Gurukul</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 20px; background: #f9f9f9; }
+        .container { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h1, h2 { color: #2c5aa0; }
+        label { display: block; margin: 15px 0 5px; font-weight: bold; }
+        input, textarea, select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 4px; }
+        textarea { min-height: 100px; }
+        .section { margin: 20px 0; padding: 15px; background: #fafafa; border-left: 3px solid #4a752c; }
+        button { background: #2c5aa0; color: white; padding: 12px 25px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 20px; }
+        button:hover { background: #1a4080; }
+        .note { font-style: italic; color: #666; font-size: 14px; }
+        .success { background: #d4edda; padding: 15px; border-left: 3px solid #28a745; margin: 15px 0; display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>चर्चा: शिक्षक आंकलन प्रश्नावली</h1>
+        <p class="note">Teacher Observation Questionnaire - 3 Axes Analysis (अक्ष 3-पढ़ाई)</p>
+
+        <div id="success-message" class="success">
+            आंकलन सफलतापूर्वक जमा हो गया! धन्यवाद।
+        </div>
+
+        <form action="https://formspree.io/f/xjgdpldy" method="POST" id="observation-form">
+            
+            <div class="section">
+                <h2>सेक्शन 0 - संदर्भ</h2>
+                <label>छात्र का नाम: <input type="text" name="student_name" required></label>
+                <label>उम्र: <input type="number" name="age" min="3" max="25" required></label>
+                <label>जानने का समय (महीनों में): <input type="number" name="time_known_months" required></label>
+                <label>तारीख: <input type="date" name="date" required></label>
+                <label>शिक्षक का नाम: <input type="text" name="teacher_name" required></label>
+            </div>
+
+            <div class="section">
+                <h2>सेक्शन 1 - स्वभाव मूल (अक्ष 2 से पढ़ाई जाता है)</h2>
+                <p class="note">जब बच्चा पूरी तरह से मुक्त हो, बिना किसी कार्य या दर्शक के, वह क्या करता है?</p>
+                <textarea name="svabhava_root" required></textarea>
+            </div>
+
+            <div class="section">
+                <h2>सेक्शन 2 - योग (अक्ष 2 - आंतरिक स्वाद)</h2>
+                <label>प्रमुख योग:
+                    <select name="primary_yoga">
+                        <option value="">चुनें...</option>
+                        <option value="Karma">कर्म - करना/सेवा</option>
+                        <option value="Bhakti">भक्ति - प्रेम/भाव</option>
+                        <option value="Jnana">ज्ञान - ज्ञान/प्रश्न</option>
+                        <option value="Raja">राज - चिंतन/विलास</option>
+                    </select>
+                </label>
+                <label>सहायक योग:
+                    <select name="supporting_yoga">
+                        <option value="">चुनें...</option>
+                        <option value="Karma">कर्म</option>
+                        <option value="Bhakti">भक्ति</option>
+                        <option value="Jnana">ज्ञान</option>
+                        <option value="Raja">राज</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="section">
+                <h2>सेक्शन 3 - वर्ण (अक्ष 3 - योग्य कार्य)</h2>
+                <label>वर्ण प्रवृत्ति:
+                    <select name="varna_tendency">
+                        <option value="">चुनें...</option>
+                        <option value="Brahmin">ब्राह्मण - ज्ञान/शिक्षण</option>
+                        <option value="Kshatriya">क्षत्रिय - नेतृत्व/रक्षा</option>
+                        <option value="Vaishya">वैश्य - पोषण/संचालन</option>
+                        <option value="Shudra">शूद्र - सेवा/कार्य</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="section">
+                <h2>सेक्शन 4 - कोशा स्थिति (अक्ष 1 - कार्य ढांचा)</h2>
+                <label>अन्नमाया (शरीर): <textarea name="annamaya"></textarea></label>
+                <label>प्राणमाया (ऊर्जा): <textarea name="pranamaya"></textarea></label>
+                <label>मनोमाया (मन): <textarea name="manomaya"></textarea></label>
+                <label>विज्ञानमाया (बुद्धि): <textarea name="vijnanamaya"></textarea></label>
+            </div>
+
+            <div class="section">
+                <h2>सेक्शन 5 - गुण वायु</h2>
+                <label>प्रमुख गुण:
+                    <select name="dominant_guna">
+                        <option value="">चुनें...</option>
+                        <option value="Sattva">सत्त्व - शान्त/स्पष्ट</option>
+                        <option value="Rajas">रजस - सक्रिय/विक्षोभी</option>
+                        <option value="Tamas">तमस - गाढ़ा/तनावित</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="section">
+                <h2>सेक्शन 6 - प्रकृति (যোगàyurveda)</h2>
+                <label>प्रमुख प्रकृति:
+                    <select name="dominant_prakriti">
+                        <option value="">चुनें...</option>
+                        <option value="Vata">वात</option>
+                        <option value="Pitta">पित्त</option>
+                        <option value="Kapha">कफ</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="section">
+                <h2>सेक्शन 7 - प्रतिभा व संवेदनशीलता</h2>
+                <label>प्रतिभाएँ: <textarea name="talents"></textarea></label>
+                <label>संवेदनशीलता: <textarea name="sensitivities"></textarea></label>
+                <label>अभ्यास की उपयोग्यता: <textarea name="practice_readiness"></textarea></label>
+            </div>
+
+            <button type="submit">आंकलन जमा करें</button>
+        </form>
+    </div>
+
+    <script>
+        // Show success message after redirect back
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success')) {
+            document.getElementById('success-message').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
