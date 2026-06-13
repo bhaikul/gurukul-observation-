@@ -1,170 +1,56 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>चर्चा: शिक्षक आंकलन प्रश्नावली - गुरुकुल</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 20px; background: #f9f9f9; }
-        .container { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        h1, h2 { color: #2c5aa0; }
-        .lang-toggle { text-align: center; margin: 15px 0; }
-        .lang-toggle button { margin: 0 5px; padding: 8px 16px; cursor: pointer; }
-        label { display: block; margin: 12px 0 4px; font-weight: 500; }
-        input, textarea, select { width: 100%; padding: 10px; margin: 6px 0; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
-        textarea { min-height: 80px; }
-        .section { margin: 18px 0; padding: 15px; background: #fafafa; border-left: 3px solid #4a752c; }
-        button { background: #2c5aa0; color: white; padding: 12px 25px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
-        button:hover { background: #1a4080; }
-        .hi { display: block; }
-        .en { display: none; }
-    </style>
+  <meta charset="UTF-8">
+  <title>Worker Test Submit</title>
 </head>
 <body>
-    <div class="container">
-        <div class="lang-toggle">
-            <button type="button" onclick="toggleLang('hi')">हिंदी</button>
-            <button type="button" onclick="toggleLang('en')">English</button>
-        </div>
-        
-        <h1 class="hi">चर्चा: शिक्षक आंकलन प्रश्नावली</h1>
-        <h1 class="en">Teacher Observation Questionnaire - Gurukul</h1>
+  <h2>Forum Worker Test</h2>
 
-        <form id="observation-form">
-            <div class="section">
-                <h2 class="hi">सेक्शन 0 - संदर्भ</h2>
-                <h2 class="en">Section 0 - Context</h2>
-                <label class="hi">छात्र का नाम: <input type="text" name="student_name" required></label>
-                <label class="en">Student Name: <input type="text" name="student_name" required></label>
-                <label class="hi">उम्र: <input type="number" name="age" min="3" max="25" required></label>
-                <label class="en">Age: <input type="number" name="age" min="3" max="25" required></label>
-                <label class="hi">जानने का समय (महीनों में): <input type="number" name="time_known_months" min="1" required></label>
-                <label class="en">Months Known: <input type="number" name="time_known_months" min="1" required></label>
-                <label class="hi">तारीख: <input type="date" name="date" required></label>
-                <label class="en">Date: <input type="date" name="date" required></label>
-                <label class="hi">शिक्षक का नाम: <input type="text" name="teacher_name" required></label>
-                <label class="en">Teacher Name: <input type="text" name="teacher_name" required></label>
-            </div>
-
-            <div class="section">
-                <h2 class="hi">सेक्शन 1 - स्वभाव मूल</h2>
-                <h2 class="en">Section 1 - Svabhava Root</h2>
-                <textarea name="svabhava_root" required></textarea>
-            </div>
-
-            <div class="section">
-                <h2 class="hi">सेक्शन 2 - योग</h2>
-                <h2 class="en">Section 2 - Yoga</h2>
-                <label>Primary Yoga:
-                    <select name="primary_yoga">
-                        <option value="">Select / चुनें</option>
-                        <option value="Karma">कर्म - Karma</option>
-                        <option value="Bhakti">भक्ति - Bhakti</option>
-                        <option value="Jnana">ज्ञान - Jnana</option>
-                        <option value="Raja">राज - Raja</option>
-                    </select>
-                </label>
-            </div>
-
-            <div class="section">
-                <h2 class="hi">सेक्शन 3 - वर्ण</h2>
-                <h2 class="en">Section 3 - Varna</h2>
-                <label>Varna Tendency:
-                    <select name="varna_tendency">
-                        <option value="">Select / चुनें</option>
-                        <option value="Brahmin">ब्राह्मण - Brahmin</option>
-                        <option value="Kshatriya">क्षत्रिय - Kshatriya</option>
-                        <option value="Vaishya">वैश्य - Vaishya</option>
-                        <option value="Shudra">शूद्र - Shudra</option>
-                    </select>
-                </label>
-            </div>
-
-            <div class="section">
-                <h2 class="hi">सेक्शन 4 - कोशा</h2>
-                <h2 class="en">Section 4 - Kosha</h2>
-                <textarea name="annamaya" placeholder="अन्नमाया / Body"></textarea>
-                <textarea name="pranamaya" placeholder="प्राणमाया / Energy"></textarea>
-                <textarea name="manomaya" placeholder="मनोमाया / Mind"></textarea>
-                <textarea name="vijnanamaya" placeholder="विज्ञानमाया / Intellect"></textarea>
-            </div>
-
-            <div class="section">
-                <h2 class="hi">सेक्शन 5 - गुण</h2>
-                <h2 class="en">Section 5 - Guna</h2>
-                <select name="dominant_guna">
-                    <option value="">Select / चुनें</option>
-                    <option value="Sattva">सत्त्व - Sattva</option>
-                    <option value="Rajas">रजस - Rajas</option>
-                    <option value="Tamas">तमस - Tamas</option>
-                </select>
-            </div>
-
-            <div class="section">
-                <h2 class="hi">सेक्शन 6 - प्रकृति</h2>
-                <h2 class="en">Section 6 - Prakriti</h2>
-                <select name="dominant_prakriti">
-                    <option value="">Select / चुनें</option>
-                    <option value="Vata">वात - Vata</option>
-                    <option value="Pitta">पित्त - Pitta</option>
-                    <option value="Kapha">कफ - Kapha</option>
-                </select>
-            </div>
-
-            <div class="section">
-                <h2 class="hi">सेक्शन 7 - अन्य</h2>
-                <h2 class="en">Section 7 - Other</h2>
-                <textarea name="talents" placeholder="प्रतिभाएँ / Talents"></textarea>
-                <textarea name="sensitivities" placeholder="संवेदनशीलता / Sensitivities"></textarea>
-            </div>
-
-            <button type="submit">जमा करें / Submit</button>
-        </form>
+  <form id="forumForm">
+    <div>
+      <label>Name</label><br>
+      <input type="text" name="name" value="Test User" required>
     </div>
+    <br>
+    <div>
+      <label>Country</label><br>
+      <input type="text" name="country" value="Germany">
+    </div>
+    <br>
+    <div>
+      <label>Message</label><br>
+      <textarea name="message" required>This is a test submission.</textarea>
+    </div>
+    <br>
+    <button type="submit">Submit Test</button>
+  </form>
 
-    <script>
-        document.getElementById('observation-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const form = e.target;
-            const payload = {
-                student_name: form.student_name.value.trim(),
-                age: form.age.value.trim(),
-                time_known_months: form.time_known_months.value.trim(),
-                date: form.date.value.trim(),
-                teacher_name: form.teacher_name.value.trim(),
-                svabhava_root: form.svabhava_root.value.trim(),
-                primary_yoga: form.primary_yoga.value,
-                supporting_yoga: "",
-                varna_tendency: form.varna_tendency.value,
-                annamaya: form.annamaya.value,
-                pranamaya: form.pranamaya.value,
-                manomaya: form.manomaya.value,
-                vijnanamaya: form.vijnanamaya.value,
-                dominant_guna: form.dominant_guna.value,
-                dominant_prakriti: form.dominant_prakriti.value,
-                talents: form.talents.value,
-                sensitivities: form.sensitivities.value
-            };
+  <pre id="result"></pre>
 
-            const res = await fetch("https://floral-math-95fa.maniskul.workers.dev/submit", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            });
+  <script>
+    document.getElementById("forumForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-            const data = await res.json();
-            alert('जमा हो गया! / Submitted!');
-            form.reset();
-        });
+      const form = e.target;
+      const payload = {
+        name: form.name.value.trim(),
+        country: form.country.value.trim(),
+        message: form.message.value.trim()
+      };
 
-        function toggleLang(lang) {
-            document.querySelectorAll('.hi').forEach(e => e.style.display = lang === 'hi' ? 'block' : 'none');
-            document.querySelectorAll('.en').forEach(e => e.style.display = lang === 'en' ? 'block' : 'none');
-        }
-        toggleLang('hi');
-    </script>
+      const res = await fetch("https://floral-math-95fa.maniskul.workers.dev/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+      document.getElementById("result").textContent =
+        JSON.stringify(data, null, 2);
+    });
+  </script>
 </body>
 </html>
