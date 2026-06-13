@@ -1,56 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <title>Worker Test Submit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>चर्चा: शिक्षक आंकलन प्रश्नावली - गुरुकुल</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #f9f9f9;
+      color: #222;
+    }
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #2c5aa0;
+    }
+    .lang-toggle {
+      text-align: center;
+      margin: 15px 0 25px;
+    }
+    .lang-toggle button {
+      margin: 0 5px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+    label {
+      display: block;
+      margin: 12px 0 4px;
+      font-weight: 600;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    .section {
+      margin: 18px 0;
+      padding: 15px;
+      background: #fafafa;
+      border-left: 3px solid #4a752c;
+    }
+    .submit-btn {
+      background: #2c5aa0;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .submit-btn:hover {
+      background: #1a4080;
+    }
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    .hi { display: block; }
+    .en { display: none; }
+    .status {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 4px;
+      display: none;
+      white-space: pre-wrap;
+    }
+    .status.success {
+      display: block;
+      background: #e8f5e9;
+      color: #1b5e20;
+      border: 1px solid #a5d6a7;
+    }
+    .status.error {
+      display: block;
+      background: #ffebee;
+      color: #b71c1c;
+      border: 1px solid #ef9a9a;
+    }
+    .small-note {
+      font-size: 13px;
+      color: #555;
+      margin-top: 4px;
+    }
+  </style>
 </head>
 <body>
-  <h2>Forum Worker Test</h2>
-
-  <form id="forumForm">
-    <div>
-      <label>Name</label><br>
-      <input type="text" name="name" value="Test User" required>
+  <div class="container">
+    <div class="lang-toggle">
+      <button type="button" onclick="toggleLang('hi')">हिंदी</button>
+      <button type="button" onclick="toggleLang('en')">English</button>
     </div>
-    <br>
-    <div>
-      <label>Country</label><br>
-      <input type="text" name="country" value="Germany">
-    </div>
-    <br>
-    <div>
-      <label>Message</label><br>
-      <textarea name="message" required>This is a test submission.</textarea>
-    </div>
-    <br>
-    <button type="submit">Submit Test</button>
-  </form>
 
-  <pre id="result"></pre>
+    <h1 class="hi">चर्चा: शिक्षक आंकलन प्रश्नावली</h1>
+    <h1 class="en">Teacher Observation Questionnaire - Gurukul</h1>
 
-  <script>
-    document.getElementById("forumForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
+    <form id="observation-form">
+      <div class="section">
+        <h2 class="hi">सेक्शन 0 - संदर्भ</h2>
+        <h2 class="en">Section 0 - Context</h2>
 
-      const form = e.target;
-      const payload = {
-        name: form.name.value.trim(),
-        country: form.country.value.trim(),
-        message: form.message.value.trim()
-      };
+        <label for="student_name" class="hi">छात्र का नाम</label>
+        <label for="student_name" class="en">Student Name</label>
+        <input type="text" id="student_name" name="student_name" required>
 
-      const res = await fetch("https://floral-math-95fa.maniskul.workers.dev/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      });
+        <label for="age" class="hi">उम्र</label>
+        <label for="age" class="en">Age</label>
+        <input type="number" id="age" name="age" min="3" max="25" required>
 
-      const data = await res.json();
-      document.getElementById("result").textContent =
-        JSON.stringify(data, null, 2);
-    });
-  </script>
-</body>
-</html>
+        <label for="time_known_months" class="hi">जानने का समय (महीनों में)</label>
+        <label for="time_known_months" class="en">Months Known</label>
+        <input type="number" 
