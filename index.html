@@ -124,4 +124,231 @@
 
         <label for="time_known_months" class="hi">जानने का समय (महीनों में)</label>
         <label for="time_known_months" class="en">Months Known</label>
-        <input type="number" 
+        <input type="number" id="time_known_months" name="time_known_months" min="1" required>
+
+        <label for="date" class="hi">तारीख</label>
+        <label for="date" class="en">Date</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="teacher_name" class="hi">शिक्षक का नाम</label>
+        <label for="teacher_name" class="en">Teacher Name</label>
+        <input type="text" id="teacher_name" name="teacher_name" required>
+      </div>
+
+      <div class="section">
+        <h2 class="hi">सेक्शन 1 - स्वभाव मूल</h2>
+        <h2 class="en">Section 1 - Svabhava Root</h2>
+
+        <label for="svabhava_root" class="hi">विवरण</label>
+        <label for="svabhava_root" class="en">Description</label>
+        <textarea id="svabhava_root" name="svabhava_root" required></textarea>
+      </div>
+
+      <div class="section">
+        <h2 class="hi">सेक्शन 2 - योग</h2>
+        <h2 class="en">Section 2 - Yoga</h2>
+
+        <label for="primary_yoga" class="hi">मुख्य योग</label>
+        <label for="primary_yoga" class="en">Primary Yoga</label>
+        <select id="primary_yoga" name="primary_yoga">
+          <option value="">Select / चुनें</option>
+          <option value="Karma">कर्म - Karma</option>
+          <option value="Bhakti">भक्ति - Bhakti</option>
+          <option value="Jnana">ज्ञान - Jnana</option>
+          <option value="Raja">राज - Raja</option>
+        </select>
+      </div>
+
+      <div class="section">
+        <h2 class="hi">सेक्शन 3 - वर्ण</h2>
+        <h2 class="en">Section 3 - Varna</h2>
+
+        <label for="varna_tendency" class="hi">वर्ण प्रवृत्ति</label>
+        <label for="varna_tendency" class="en">Varna Tendency</label>
+        <select id="varna_tendency" name="varna_tendency">
+          <option value="">Select / चुनें</option>
+          <option value="Brahmin">ब्राह्मण - Brahmin</option>
+          <option value="Kshatriya">क्षत्रिय - Kshatriya</option>
+          <option value="Vaishya">वैश्य - Vaishya</option>
+          <option value="Shudra">शूद्र - Shudra</option>
+        </select>
+      </div>
+
+      <div class="section">
+        <h2 class="hi">सेक्शन 4 - कोशा</h2>
+        <h2 class="en">Section 4 - Kosha</h2>
+
+        <label for="annamaya" class="hi">अन्नमाया / Body</label>
+        <label for="annamaya" class="en">Annamaya / Body</label>
+        <textarea id="annamaya" name="annamaya"></textarea>
+
+        <label for="pranamaya" class="hi">प्राणमाया / Energy</label>
+        <label for="pranamaya" class="en">Pranamaya / Energy</label>
+        <textarea id="pranamaya" name="pranamaya"></textarea>
+
+        <label for="manomaya" class="hi">मनोमाया / Mind</label>
+        <label for="manomaya" class="en">Manomaya / Mind</label>
+        <textarea id="manomaya" name="manomaya"></textarea>
+
+        <label for="vijnanamaya" class="hi">विज्ञानमाया / Intellect</label>
+        <label for="vijnanamaya" class="en">Vijnanamaya / Intellect</label>
+        <textarea id="vijnanamaya" name="vijnanamaya"></textarea>
+      </div>
+
+      <div class="section">
+        <h2 class="hi">सेक्शन 5 - गुण</h2>
+        <h2 class="en">Section 5 - Guna</h2>
+
+        <label for="dominant_guna" class="hi">प्रधान गुण</label>
+        <label for="dominant_guna" class="en">Dominant Guna</label>
+        <select id="dominant_guna" name="dominant_guna">
+          <option value="">Select / चुनें</option>
+          <option value="Sattva">सत्त्व - Sattva</option>
+          <option value="Rajas">रजस - Rajas</option>
+          <option value="Tamas">तमस - Tamas</option>
+        </select>
+      </div>
+
+      <div class="section">
+        <h2 class="hi">सेक्शन 6 - प्रकृति</h2>
+        <h2 class="en">Section 6 - Prakriti</h2>
+
+        <label for="dominant_prakriti" class="hi">प्रधान प्रकृति</label>
+        <label for="dominant_prakriti" class="en">Dominant Prakriti</label>
+        <select id="dominant_prakriti" name="dominant_prakriti">
+          <option value="">Select / चुनें</option>
+          <option value="Vata">वात - Vata</option>
+          <option value="Pitta">पित्त - Pitta</option>
+          <option value="Kapha">कफ - Kapha</option>
+        </select>
+      </div>
+
+      <div class="section">
+        <h2 class="hi">सेक्शन 7 - अन्य</h2>
+        <h2 class="en">Section 7 - Other</h2>
+
+        <label for="talents" class="hi">प्रतिभाएँ / Talents</label>
+        <label for="talents" class="en">Talents</label>
+        <textarea id="talents" name="talents"></textarea>
+
+        <label for="sensitivities" class="hi">संवेदनशीलता / Sensitivities</label>
+        <label for="sensitivities" class="en">Sensitivities</label>
+        <textarea id="sensitivities" name="sensitivities"></textarea>
+      </div>
+
+      <button class="submit-btn" id="submitBtn" type="submit">जमा करें / Submit</button>
+      <div id="statusBox" class="status"></div>
+      <div class="small-note hi">जमा करने के बाद परिणाम नीचे दिखाई देगा।</div>
+      <div class="small-note en">After submission, the result will appear below.</div>
+    </form>
+  </div>
+
+  <script>
+    const WORKER_URL = "https://floral-math-95fa.maniskul.workers.dev/submit";
+
+    function toggleLang(lang) {
+      document.querySelectorAll('.hi').forEach(el => {
+        el.style.display = lang === 'hi' ? 'block' : 'none';
+      });
+      document.querySelectorAll('.en').forEach(el => {
+        el.style.display = lang === 'en' ? 'block' : 'none';
+      });
+    }
+
+    function buildMessage(payload) {
+      return [
+        `Teacher Observation Submission`,
+        `Student Name: ${payload.student_name || ""}`,
+        `Age: ${payload.age || ""}`,
+        `Months Known: ${payload.time_known_months || ""}`,
+        `Date: ${payload.date || ""}`,
+        `Teacher Name: ${payload.teacher_name || ""}`,
+        `Svabhava Root: ${payload.svabhava_root || ""}`,
+        `Primary Yoga: ${payload.primary_yoga || ""}`,
+        `Varna Tendency: ${payload.varna_tendency || ""}`,
+        `Annamaya: ${payload.annamaya || ""}`,
+        `Pranamaya: ${payload.pranamaya || ""}`,
+        `Manomaya: ${payload.manomaya || ""}`,
+        `Vijnanamaya: ${payload.vijnanamaya || ""}`,
+        `Dominant Guna: ${payload.dominant_guna || ""}`,
+        `Dominant Prakriti: ${payload.dominant_prakriti || ""}`,
+        `Talents: ${payload.talents || ""}`,
+        `Sensitivities: ${payload.sensitivities || ""}`
+      ].join("\n");
+    }
+
+    document.getElementById("observation-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const submitBtn = document.getElementById("submitBtn");
+      const statusBox = document.getElementById("statusBox");
+
+      statusBox.className = "status";
+      statusBox.textContent = "";
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      const detailedPayload = {
+        student_name: form.student_name.value.trim(),
+        age: form.age.value.trim(),
+        time_known_months: form.time_known_months.value.trim(),
+        date: form.date.value.trim(),
+        teacher_name: form.teacher_name.value.trim(),
+        svabhava_root: form.svabhava_root.value.trim(),
+        primary_yoga: form.primary_yoga.value,
+        supporting_yoga: "",
+        varna_tendency: form.varna_tendency.value,
+        annamaya: form.annamaya.value.trim(),
+        pranamaya: form.pranamaya.value.trim(),
+        manomaya: form.manomaya.value.trim(),
+        vijnanamaya: form.vijnanamaya.value.trim(),
+        dominant_guna: form.dominant_guna.value,
+        dominant_prakriti: form.dominant_prakriti.value,
+        talents: form.talents.value.trim(),
+        sensitivities: form.sensitivities.value.trim()
+      };
+
+      const payload = {
+        name: detailedPayload.student_name || "Unnamed Student",
+        country: "Teacher Observation Form",
+        message: buildMessage(detailedPayload),
+        ...detailedPayload
+      };
+
+      try {
+        const res = await fetch(WORKER_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.ok) {
+          statusBox.className = "status success";
+          statusBox.textContent =
+            "जमा हो गया! / Submitted successfully!\n\nSubmission ID: " + (data.id || "N/A");
+          form.reset();
+        } else {
+          statusBox.className = "status error";
+          statusBox.textContent =
+            "जमा नहीं हो सका / Submission failed\n\n" +
+            JSON.stringify(data, null, 2);
+        }
+      } catch (error) {
+        statusBox.className = "status error";
+        statusBox.textContent =
+          "नेटवर्क या सर्वर त्रुटि / Network or server error\n\n" + error.message;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "जमा करें / Submit";
+      }
+    });
+
+    toggleLang("hi");
+  </script>
+</body>
+</html>
