@@ -19,11 +19,18 @@
       --success-text: #176534;
       --error-bg: #fff0f0;
       --error-text: #a61b1b;
+      --info-bg: #eef4ff;
+      --info-text: #17396a;
+      --info-border: #cbd9f3;
       --radius: 10px;
       --shadow: 0 4px 18px rgba(0,0,0,0.08);
     }
 
     * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
@@ -79,10 +86,15 @@
       border-radius: 8px;
       cursor: pointer;
       font-size: 14px;
+      min-height: 44px;
     }
 
     .lang-toggle button:hover {
       background: var(--primary-dark);
+    }
+
+    .lang-toggle button.active {
+      background: var(--accent);
     }
 
     .section {
@@ -174,6 +186,7 @@
       font-size: 16px;
       border-radius: 8px;
       cursor: pointer;
+      min-height: 44px;
     }
 
     .submit-btn:hover {
@@ -191,6 +204,7 @@
       border-radius: 8px;
       display: none;
       white-space: pre-wrap;
+      word-break: break-word;
     }
 
     .status.success {
@@ -205,6 +219,13 @@
       background: var(--error-bg);
       color: var(--error-text);
       border: 1px solid #efb8b8;
+    }
+
+    .status.info {
+      display: block;
+      background: var(--info-bg);
+      color: var(--info-text);
+      border: 1px solid var(--info-border);
     }
 
     .hi, .en, .gu { display: none; }
@@ -229,9 +250,9 @@
   <div class="page">
     <div class="container">
       <div class="lang-toggle">
-        <button type="button" onclick="toggleLang('hi')">हिंदी</button>
-        <button type="button" onclick="toggleLang('en')">English</button>
-        <button type="button" onclick="toggleLang('gu')">ગુજરાતી</button>
+        <button type="button" class="lang-btn" data-lang="hi">हिंदी</button>
+        <button type="button" class="lang-btn" data-lang="en">English</button>
+        <button type="button" class="lang-btn" data-lang="gu">ગુજરાતી</button>
       </div>
 
       <h1 class="hi">आंकलन प्रश्नावली</h1>
@@ -248,7 +269,7 @@
         <p class="gu">દરેક વિભાગમાં જેટલું જરૂરી હોય તેટલું લખો. ખાતરી ન હોય તો “હું સંપૂર્ણ ખાતરીથી નથી કહી શકતો/તી” અથવા “મેં બન્ને રીતે જોયું છે” એવું લખો. ફક્ત એક દિવસનું નહીં, પણ ઘણા મહિનાઓમાં દેખાતો સ્થિર સ્વભાવ લખો.</p>
       </div>
 
-      <form id="observation-form">
+      <form id="observation-form" novalidate>
         <div class="section">
           <h2 class="section-title hi">सेक्शन 0 - संदर्भ</h2>
           <h2 class="section-title en">Section 0 - Context</h2>
@@ -259,21 +280,21 @@
               <label for="student_name" class="hi">छात्र का नाम</label>
               <label for="student_name" class="en">Student Name</label>
               <label for="student_name" class="gu">બાળકનું નામ</label>
-              <input type="text" id="student_name" name="student_name" required>
+              <input type="text" id="student_name" name="student_name" required autocomplete="name">
             </div>
 
             <div class="field">
               <label for="age" class="hi">उम्र</label>
               <label for="age" class="en">Age</label>
               <label for="age" class="gu">ઉંમર</label>
-              <input type="number" id="age" name="age" min="3" max="25" required>
+              <input type="number" id="age" name="age" min="3" max="25" required inputmode="numeric">
             </div>
 
             <div class="field">
               <label for="time_known_months" class="hi">कितने महीनों से जानते हैं</label>
               <label for="time_known_months" class="en">Time Known (months)</label>
               <label for="time_known_months" class="gu">કેટલા મહિનાથી ઓળખો છો</label>
-              <input type="number" id="time_known_months" name="time_known_months" min="1" required>
+              <input type="number" id="time_known_months" name="time_known_months" min="1" required inputmode="numeric">
             </div>
 
             <div class="field">
@@ -287,7 +308,7 @@
               <label for="teacher_name" class="hi">शिक्षक का नाम</label>
               <label for="teacher_name" class="en">Teacher Name</label>
               <label for="teacher_name" class="gu">શિક્ષકનું નામ</label>
-              <input type="text" id="teacher_name" name="teacher_name" required>
+              <input type="text" id="teacher_name" name="teacher_name" required autocomplete="name">
             </div>
           </div>
         </div>
@@ -586,7 +607,7 @@
 
         <div class="submit-wrap">
           <button class="submit-btn" id="submitBtn" type="submit">जमा करें / Submit</button>
-          <div id="statusBox" class="status"></div>
+          <div id="statusBox" class="status" aria-live="polite"></div>
           <div class="small-note hi">जमा करने के बाद परिणाम नीचे दिखाई देगा।</div>
           <div class="small-note en">After submission, the result will appear below.</div>
           <div class="small-note gu">જમા કર્યા પછી પરિણામ નીચે દેખાશે.</div>
@@ -598,17 +619,79 @@
   <script>
     const WORKER_URL = "https://floral-math-95fa.maniskul.workers.dev/submit";
 
+    /*
+      Leave this as "" unless you intentionally enabled HMAC_SECRET in the Worker
+      and want the browser to send X-Timestamp and X-Signature too.
+      If HMAC_SECRET is set in the Worker, this page must use the same value.
+      If HMAC_SECRET is empty in the Worker, keep this empty.
+    */
+    const HMAC_SECRET = "";
+
+    let currentLang = "hi";
+    let isSubmitting = false;
+    let currentIdempotencyKey = createIdempotencyKey();
+
+    const form = document.getElementById("observation-form");
+    const submitBtn = document.getElementById("submitBtn");
+    const statusBox = document.getElementById("statusBox");
+    const langButtons = Array.from(document.querySelectorAll(".lang-btn"));
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener("click", () => toggleLang(btn.dataset.lang));
+    });
+
     function toggleLang(lang) {
-      document.querySelectorAll(".hi, .en, .gu").forEach(el => {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll(".hi, .en, .gu").forEach((el) => {
         el.style.display = "none";
       });
-      document.querySelectorAll("." + lang).forEach(el => {
+
+      document.querySelectorAll("." + lang).forEach((el) => {
         el.style.display = el.tagName === "LI" ? "list-item" : "block";
       });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+      });
+
+      if (!isSubmitting) {
+        submitBtn.textContent = getSubmitLabel();
+      }
     }
 
     function safe(v) {
-      return (v || "").trim();
+      return String(v || "").trim();
+    }
+
+    function getSubmitLabel() {
+      if (currentLang === "en") return "Submit";
+      if (currentLang === "gu") return "જમા કરો / Submit";
+      return "जमा करें / Submit";
+    }
+
+    function getSubmittingLabel() {
+      if (currentLang === "en") return "Submitting...";
+      if (currentLang === "gu") return "જમા થઈ રહ્યું છે...";
+      return "जमा किया जा रहा है...";
+    }
+
+    function createIdempotencyKey() {
+      if (window.crypto && typeof crypto.randomUUID === "function") {
+        return crypto.randomUUID();
+      }
+      return "idem-" + Date.now() + "-" + Math.random().toString(36).slice(2);
+    }
+
+    function setStatus(type, message) {
+      statusBox.className = "status " + type;
+      statusBox.textContent = message;
+    }
+
+    function resetStatus() {
+      statusBox.className = "status";
+      statusBox.textContent = "";
     }
 
     function buildMessage(payload) {
@@ -650,19 +733,8 @@
       ].join("\n");
     }
 
-    document.getElementById("observation-form").addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const form = e.target;
-      const submitBtn = document.getElementById("submitBtn");
-      const statusBox = document.getElementById("statusBox");
-
-      statusBox.className = "status";
-      statusBox.textContent = "";
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Submitting...";
-
-      const detailedPayload = {
+    function buildDetailedPayload() {
+      return {
         form_type: "teacher_observation_questionnaire",
         student_name: safe(form.student_name.value),
         age: safe(form.age.value),
@@ -683,8 +755,84 @@
         talents: safe(form.talents.value),
         sensitivities: safe(form.sensitivities.value),
         practice_readiness: safe(form.practice_readiness.value),
-        source_language_ui: document.documentElement.lang || "hi"
+        source_language_ui: currentLang
       };
+    }
+
+    function validateForm() {
+      if (!form.reportValidity()) {
+        return false;
+      }
+
+      const requiredChecks = [
+        safe(form.student_name.value),
+        safe(form.age.value),
+        safe(form.time_known_months.value),
+        safe(form.date.value),
+        safe(form.teacher_name.value),
+        safe(form.svabhava_root.value)
+      ];
+
+      return requiredChecks.every(Boolean);
+    }
+
+    async function hmacSha256Hex(secret, message) {
+      const encoder = new TextEncoder();
+      const key = await crypto.subtle.importKey(
+        "raw",
+        encoder.encode(secret),
+        { name: "HMAC", hash: "SHA-256" },
+        false,
+        ["sign"]
+      );
+
+      const sig = await crypto.subtle.sign("HMAC", key, encoder.encode(message));
+      return Array.from(new Uint8Array(sig))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+    }
+
+    async function buildRequestHeaders(rawBody) {
+      const headers = {
+        "Content-Type": "application/json",
+        "Idempotency-Key": currentIdempotencyKey
+      };
+
+      if (HMAC_SECRET) {
+        const timestamp = String(Date.now());
+        const signature = await hmacSha256Hex(HMAC_SECRET, `${timestamp}.${rawBody}`);
+        headers["X-Timestamp"] = timestamp;
+        headers["X-Signature"] = signature;
+      }
+
+      return headers;
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (isSubmitting) {
+        return;
+      }
+
+      if (!validateForm()) {
+        setStatus(
+          "error",
+          currentLang === "en"
+            ? "Please fill all required fields."
+            : currentLang === "gu"
+            ? "કૃપા કરીને જરૂરી બધા ફીલ્ડ ભરો."
+            : "कृपया सभी आवश्यक फ़ील्ड भरें।"
+        );
+        return;
+      }
+
+      isSubmitting = true;
+      resetStatus();
+      submitBtn.disabled = true;
+      submitBtn.textContent = getSubmittingLabel();
+
+      const detailedPayload = buildDetailedPayload();
 
       const payload = {
         name: detailedPayload.student_name || "Unnamed Student",
@@ -693,37 +841,72 @@
         ...detailedPayload
       };
 
+      const rawBody = JSON.stringify(payload);
+
       try {
+        const headers = await buildRequestHeaders(rawBody);
+
         const res = await fetch(WORKER_URL, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(payload)
+          headers,
+          body: rawBody
         });
 
-        const data = await res.json();
+        const contentType = res.headers.get("content-type") || "";
+        const data = contentType.includes("application/json")
+          ? await res.json()
+          : { ok: false, error: "non_json_response", raw: await res.text() };
 
         if (res.ok && data.ok) {
-          statusBox.className = "status success";
-          statusBox.textContent =
-            "जमा हो गया! / Submitted successfully! / સફળતાપૂર્વક જમા થયું!\n\nSubmission ID: " +
-            (data.id || "N/A");
-          form.reset();
+          if (data.duplicate) {
+            setStatus(
+              "info",
+              [
+                "यह फ़ॉर्म पहले ही जमा हो चुका है।",
+                "This form was already submitted.",
+                "આ ફોર્મ પહેલેથી જમા થઈ ચૂક્યું છે.",
+                "",
+                "Submission ID: " + (data.id || "N/A")
+              ].join("\n")
+            );
+          } else {
+            setStatus(
+              "success",
+              [
+                "जमा हो गया!",
+                "Submitted successfully!",
+                "સફળતાપૂર્વક જમા થયું!",
+                "",
+                "Submission ID: " + (data.id || "N/A")
+              ].join("\n")
+            );
+
+            form.reset();
+            currentIdempotencyKey = createIdempotencyKey();
+          }
         } else {
-          statusBox.className = "status error";
-          statusBox.textContent =
-            "जमा नहीं हो सका / Submission failed / જમા થઈ શક્યું નથી\n\n" +
-            JSON.stringify(data, null, 2);
+          setStatus(
+            "error",
+            [
+              "जमा नहीं हो सका / Submission failed / જમા થઈ શક્યું નથી",
+              "",
+              JSON.stringify(data, null, 2)
+            ].join("\n")
+          );
         }
       } catch (error) {
-        statusBox.className = "status error";
-        statusBox.textContent =
-          "नेटवर्क या सर्वर त्रुटि / Network or server error / નેટવર્ક અથવા સર્વર ભૂલ\n\n" +
-          error.message;
+        setStatus(
+          "error",
+          [
+            "नेटवर्क या सर्वर त्रुटि / Network or server error / નેટવર્ક અથવા સર્વર ભૂલ",
+            "",
+            error && error.message ? error.message : String(error)
+          ].join("\n")
+        );
       } finally {
+        isSubmitting = false;
         submitBtn.disabled = false;
-        submitBtn.textContent = "जमा करें / Submit";
+        submitBtn.textContent = getSubmitLabel();
       }
     });
 
@@ -731,4 +914,3 @@
   </script>
 </body>
 </html>
-</query>
